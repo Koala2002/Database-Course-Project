@@ -1,0 +1,300 @@
+@import url(Theme.css);
+
+.ViewTabBlock{
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: calc(50vw - 50px);
+    height:calc(92vh - 100px);
+
+    padding:25px;  
+}
+
+.ViewTab{
+    display: none;
+    align-items: left;
+    justify-content: space-between;
+
+    flex-direction: column;
+
+    position: absolute;
+
+    
+
+    width: calc(50vw - 100px);
+    height:calc(92vh - 215px);
+
+    background-color: var(--websitebackground-color);
+
+    border-radius: 15px;
+
+    padding: 25px;
+}
+
+.ViewTab .ViewTab{
+    width: calc(50vw - 150px);
+    height:calc(92vh - 215px);
+
+    padding: 0;
+}
+
+.tab-btn-bar{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: left;
+    
+    position: absolute;
+    bottom:0;
+
+    width: calc(50vw - 100px);
+    height:40px;
+    
+    background-color: rgba(50, 50, 50,0.5);
+
+    
+
+    border-radius: 30px;
+
+    padding-left: 25px;
+    padding-right: 25px;
+
+    margin-bottom: 25px;
+}
+
+.tab-btn{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    
+    width:40px;
+    height:40px;
+
+    border-radius: 30px;
+    border:none;
+
+    margin-right: 25px;
+
+    color:var(--linkText-color);
+
+    background-color: var(--linkBackground-color);
+    transition: background-color 0.1s;
+
+    box-shadow: var(--linkshadow);
+
+    &:hover{
+        background-color:  var(--linkBackground-hover-color);
+        cursor: pointer;
+    }
+}
+
+.ViewTab-Row{
+    display: flex;
+    align-items: center;
+    justify-content: left;
+
+
+    width: calc(50vw - 100px);
+    height:calc((92vh - 270px) / 2);
+
+    border-radius: 7.5px;
+}
+
+
+.goods-item-Block{
+    display: flex;
+    align-items: left;
+    justify-content: space-between;
+
+    flex-direction: column;
+
+    width:calc((50vw - 210px) / 3 );
+    height:calc((92vh - 300px) / 2);
+
+    border-radius:7.5px;
+
+    background-color: var(--websitesecondColor);
+
+    margin-left: 25px;
+
+    box-shadow: var(--infContent-shadow);
+
+    padding: 10px;
+
+    
+    &:hover{
+        cursor:pointer;
+    }
+}
+
+.goods-item-Block:first-child{
+    margin-left: 0px;
+}
+
+.Book-Img-Block{
+
+    display: flex;
+    align-items: left;
+    justify-content: center;
+
+
+  
+    font-size: 4em;
+
+    border-bottom: 1px solid var(--websitebackground-color);
+
+}
+
+.Book-Name-Block{
+    height: 2.5em;
+    
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+
+    padding: 5px;
+
+   
+
+    line-height: 1.25em;
+
+    font-weight: bold;
+}
+
+.Book-ISBN-Block{
+    line-height: 1.25em;
+
+  
+    padding: 5px;
+    
+}
+
+.Book-PriceNumber-Block{
+    display: flex;
+    align-items: left;
+    justify-content: space-between;
+
+    width:calc((50vw - 210px) / 3);
+}
+
+.Book-Price-Block,.Book-Number-Block{
+    line-height: 1.25em;
+
+    display: flex;
+    align-items: left;
+    justify-content: left;
+
+    flex-direction: column;
+
+    display: flex;
+    align-items: left;
+    justify-content: right;
+
+    
+ 
+
+    padding: 5px;
+
+    
+}
+
+.Book-Description-Block{
+    height:5em;
+  
+    line-height: 1.25em;
+
+   
+    overflow-wrap: break-word;
+    hyphens: auto;
+    padding: 5px;
+
+    
+    border-left: 1px solid var(--websitebackground-color);
+}
+
+.Book-Number-Price-Description-Block{
+    display: flex;
+    width:calc((50vw - 210px) / 3);
+}
+
+.Book-Number-Price-Block{
+    display: flex;
+    flex-direction: column;
+    height:2.5em;
+}
+
+
+/*newgoods theme*/
+.NewGoods-tab-btn-bar{
+    width: calc(50vw - 250px);
+}
+
+.NewGoods-Book-Name-Block{height: calc(2.5em - 1px);}
+.NewGoods-Book-ISBN-Block{height: calc(1.25em - 1px);}
+
+.NewGoods-Book-Name-Block,.NewGoods-Book-ISBN-Block{
+    border-bottom: 1px solid var(--websitebackground-color);
+}
+
+.NewGoods-Book-Number-Block,.NewGoods-Book-Price-Block{
+    width:calc((50vw - 210px) / 3 * 0.45 - 10px);
+}
+
+.Book-Description-Block{
+    width:calc((50vw - 210px) / 3 * 0.55 - 10px);
+}
+/*newgoods theme*/
+
+
+/*MainPage theme*/
+.MainPage-ViewTabBlock{
+    width: calc(80vw - 100px);
+    height:calc(92vh - 125px);
+}
+
+.MainPage-ViewTab{
+    width: calc(80vw - 100px);
+    height:calc(92vh - 240px);
+}
+
+.MainPage-ViewTab-Row{
+    width: calc(80vw - 100px);
+}
+
+.MainPage-tab-btn-bar{
+    width: calc(80vw - 100px);
+    margin-left: 25px;
+}
+/*MainPage theme*/
+
+
+.EditBookInf-Btn,.DeleteItem-Btn{
+    position: absolute;
+
+    width: 40px;
+    height: 40px;
+
+    background-color: rgb(43, 165, 226);
+
+    border-radius: 30px;
+
+    border:none;
+
+    color:var(--linkText-color);
+
+    background-color: var(--linkBackground-color);
+    transition: background-color 0.1s;
+
+    box-shadow: var(--linkshadow);
+
+    &:hover{
+        background-color:  var(--linkBackground-hover-color);
+        cursor: pointer;
+    }
+}
+
+.EditBookInf-Btn{transform:translate(calc(-5px + (50vw) / 3 * 0.5),calc(-10px + -1 * (92vh - 565px) / 2 * 0.5));}
+
+.DeleteItem-Btn{transform:translate(calc(45px + (50vw) / 3 * 0.5),calc(-10px + -1 * (92vh - 565px) / 2 * 0.5));}

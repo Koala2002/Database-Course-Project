@@ -1,0 +1,160 @@
+@import url("Theme.css");
+
+#Book-Information-Block{
+    display: flex;
+
+    position: absolute;
+    left:10vw;
+    top:calc(50px + 4vh);
+
+    width: calc(80vw - 50px);
+    height:calc(92vh - 100px);
+
+    background-color: var(--websitesecondColor);
+    
+    box-shadow: var(--contentBlock-shadow);
+
+    padding: 25px;
+
+    border-radius: 25px;
+
+    line-height: 1.25em;
+}
+
+#Book-Img-Block{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 12em;
+
+    height:calc(92vh - 100px);
+    width:calc((80vw - 50px) * 0.35);
+    background-color: rgb(219, 210, 255);
+}
+
+#Book-INF-Block{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+
+    height:calc(92vh - 150px);
+    width:calc((80vw - 100px) * 0.45 - 3px);
+    
+
+    border-right:1.5px solid var(--websitebackground-color);
+    border-left:1.5px solid var(--websitebackground-color);
+
+    padding: 25px;
+}
+
+#Book-Name-Block{
+    height: 2.5em;
+    width:calc((80vw - 115px) * 0.45);
+    
+    font-size: 1.25em;
+    font-weight: bold;
+
+    
+    border-bottom:1.5px solid var(--websitebackground-color);
+    user-select:text;
+
+    padding: 5px;
+
+    line-height: 1.25em;
+}
+
+#Book-ISBN-Block{
+    width:calc((80vw - 115px) * 0.45);
+   
+    padding: 5px;
+
+    line-height: 1.25em;
+}
+
+#Book-Num-Block{
+    
+    width:calc((80vw - 115px) * 0.45);
+    padding: 5px;
+}
+
+#Book-Price-Block{
+   
+    width:calc((80vw - 115px) * 0.45);
+  
+    padding: 5px;
+}
+
+#Book-Description-Block-Title{
+    width:calc((80vw - 115px) * 0.45);
+    background-color: var(--websitebackground-color);
+
+    color:var(--websitesecondColor);
+
+    margin-top: 25px;
+
+    padding: 5px;
+    
+}
+
+#Book-Description-Block{
+    width:calc((80vw - 115px) * 0.45 - 2px);
+    
+    padding: 5px;
+
+    border:1px solid var(--websitebackground-color);
+
+    
+    word-wrap: break-word; /* Alias for overflow-wrap */
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+
+
+#Book-User-INF-Block{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    flex-direction: column;
+
+    height:calc(92vh - 150px);
+    width: calc((80vw - 100px) * 0.2);
+    background-color: aquamarine;
+
+    padding: 25px;
+}
+
+#Book-UserID-Block{
+
+}
+
+#Book-Order-Button{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    background-color: var(--linkBackground-color);
+
+    border:none;
+    border-radius: 30px;
+
+    width: 150px;
+    height: 35px;
+
+    font-size: 1em;
+
+    color:var(--linkText-color);
+    text-decoration:none;
+
+    user-select: none;
+
+    box-shadow: var(--linkshadow);
+
+    margin-top: 25px;
+
+    &:hover{
+        background-color:  var(--linkBackground-hover-color);
+        cursor:pointer;
+    }
+}

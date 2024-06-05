@@ -1,0 +1,24 @@
+@import url(Theme.css);
+
+@font-face {
+    font-family: 'JF';
+    src: url('../Font/jf-openhuninn-2.0.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Nunito';
+    src: url('../Font/Nunito-VariableFont_wght.ttf') format('truetype');
+}
+
+body{
+    font-family: 'Nunito','JF';
+    background-color: var(--websitebackground-color);
+    color:var(--websitebackground-color);
+    overflow:hidden;
+    user-select: none;
+}
+
+button,input[type=submit]{
+    color:var(--linkText-color);
+}
+
