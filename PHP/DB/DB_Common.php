@@ -1,6 +1,6 @@
 <?php
-    $loginsys=mysqli_connect("localhost","root","WU20021111","loginsystem");//系統資料庫
-    $bookstore=mysqli_connect("localhost","root","WU20021111","bookstore");//書籍資料庫
+    $loginsys=mysqli_connect("localhost","expdb","WU20021111","loginsystem");//系統資料庫
+    $bookstore=mysqli_connect("localhost","expdb","WU20021111","bookstore");//書籍資料庫
 
     function CheckLogin($db){//確認目前裝置有沒有登入者
         $ipaddress=$_SERVER['REMOTE_ADDR'];
