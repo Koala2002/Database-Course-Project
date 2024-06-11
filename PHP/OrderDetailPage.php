@@ -1,6 +1,6 @@
 <?php
-    require_once("DB/DB_Common.php");
-    require_once("DB/DB_OrderDetail.php");
+    require_once("PHP//DB//DB_Common.php");
+    require_once("PHP//DB//DB_OrderDetail.php");
     echo $_POST["OrderID"];
 ?>
 

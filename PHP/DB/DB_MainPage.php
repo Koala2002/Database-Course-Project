@@ -1,5 +1,5 @@
 <?php
-    require_once("DB_Common.php");
+    require_once("PHP//DB//DB_Common.php");
 
     /*fetch all goods from database*/
     $SQL="";

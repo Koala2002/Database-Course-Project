@@ -1,13 +1,11 @@
 <?php
-    require_once("DB_Common.php");
+    require_once("PHP//DB//DB_Common.php");
  
     $LoginUserInf=GetLoginUser($loginsys);
 
     $account=$LoginUserInf?$LoginUserInf[0]:null;
     $password=$LoginUserInf?$LoginUserInf[1]:null;
-
-    $user=$LoginUserInf?mysqli_connect("localhost",$account,$password,"bookstore"):null;
-    
+   
     /*fetch goods from user database*/
     $result=mysqli_query($bookstore,"SELECT * FROM goods WHERE user_id='$_GET[UserID]'");
     $goodslistData=array();

@@ -1,5 +1,5 @@
 <?php
-    require_once ("DB_Common.php");
+    require_once ("PHP//DB//DB_Common.php");
 
     $data=mysqli_query($bookstore,"
         SELECT * FROM order_detail WHERE ord_id=$_POST[OrderID]

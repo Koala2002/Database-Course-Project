@@ -1,6 +1,6 @@
 <?php
-    require_once("DB/DB_Common.php");
-    require_once("DB/DB_newGoods.php");
+    require_once("PHP//DB//DB_Common.php");
+    require_once("PHP//DB//DB_newGoods.php");
 
     if($_POST){GoodsUpload($bookstore,$loginsys);}
 ?>
