@@ -1,4 +1,4 @@
-@import url(Theme.css);
+@import url("Theme.css");
 
 @font-face {
     font-family: 'JF';
@@ -22,3 +22,59 @@ button,input[type=submit]{
     color:var(--linkText-color);
 }
 
+::-webkit-scrollbar {
+    width: 10px; /* 宽度 */
+    height: 0px; /* 高度 */
+}
+
+/* 滚动条轨道 */
+::-webkit-scrollbar-track {
+    background: transparent; /* 轨道背景色 */
+    border-radius: 10px; /* 圆角 */
+}
+
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+    background: var(--websitebackground-color); /* 滑块颜色 */
+    border-radius: 10px; /* 圆角 */
+}
+
+/* 滚动条滑块在悬停时 */
+::-webkit-scrollbar-thumb:hover {
+    background: var(--linkBackground-hover-color); /* 滑块悬停颜色 */
+}
+
+::-webkit-scrollbar-button {height: 0;}
+
+#Cart-Link{
+    width: 50px;
+    height:50px;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    position:absolute;
+
+    bottom:calc(5vw - 25px);
+    right:calc(5vw - 25px);
+
+    background-color: var(--linkBackground-color);
+
+    border-radius: 100px;
+
+    font-size: 1em;
+
+    color:var(--linkText-color);
+    text-decoration:none;
+
+    user-select: none;
+
+    box-shadow: var(--linkshadow);
+
+    &:hover{
+        background-color:  var(--linkBackground-hover-color);
+        cursor:pointer;
+    }
+}

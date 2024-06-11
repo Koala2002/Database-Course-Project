@@ -21,7 +21,7 @@
         
         $result=mysqli_query($db,$find_user);
 
-        if($result)return mysqli_fetch_row($result);
+        if($result)return mysqli_fetch_array($result);
 
         return null;
     }
@@ -35,8 +35,6 @@
         $inf_upd="UPDATE login_inf SET last_ip='$ipaddress',status='0' WHERE user_id='$user_id'";
         
         mysqli_query($db,$inf_upd);
-        
-
-        header("location:../index.php"); 
+         
     }
 ?>

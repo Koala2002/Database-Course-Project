@@ -1,25 +1,35 @@
 :root{
     /*body*/
-    --websitebackground-color:rgb(50, 50, 50);
+    --websitebackground-color:rgb(50, 50,50);
     --websitesecondColor:rgb(235, 235, 235);
+    --websitethirdColor:rgb(80, 120, 180);
     /*body*/
 
     /*Header,content*/
-    --infContent-shadow:0px 0px 0.5em inset rgb(50,50,50);
-    --contentBlock-shadow:0px 0px 10px inset rgb(30, 30, 30),0px 0px 5px rgb(60, 60, 60);
+    --contentBlock-hover-background-color:rgb(235, 240, 245);
+    --infContent-shadow:0px 0px 5px 5px rgb(0,0,0,0.25);
+    --contentBlock-shadow:0px 0px 5px 5px rgb(0,0,0,0.25);
+    --contentBlock-inset-shadow:0px 0px 5px 5px inset rgb(0,0,0,0.25);
+    
     /*Header,content*/
 
-    /*links,submit,button,searchbar,input*/
+    /*links,submit,button,searchbar,input,mailbox*/
     --linkBackground-color:rgb(45,45,45);
     --linkBackground-hover-color:rgb(60,60,60);
     --linkText-color:aliceblue;
     --linkshadow: 0px 0px 5px  rgb(80, 80, 80);
-    --textbar-shadow:0px 0px 10px inset rgb(40, 40, 40);
-    --textlink-hover-color:rgb(60, 150, 200);
-    --input-background-color:rgb(215,215,215);
-    /*links,submit,button,searchbar,input*/
 
-    /*goodsBlock*/
-    --goodsBlock-shadow:0px 1px 10px inset rgb(30, 30, 30),0px 0px 5px rgb(60, 60, 60);
-    /*goodslist*/
+    --textlink-color:rgb(60, 150, 200);
+    --textlink-hover-color:rgba(100, 170, 200, 0.1);
+    --input-background-color:rgb(215,215,215);
+    --input-shadow:0px 0px 5px inset rgb(0, 0, 0);
+
+    --MailBoxShadow:0 5px 5px -5px rgb(0,0,0,0.25), 5px 0 5px -5px rgb(0,0,0,0.25), -5px 0 5px -5px rgb(0,0,0,0.25);
+
+    --btnPageNow-Hover-backgroundColor:rgb(100, 140, 200);
+
+    --accept-btn-background-color:rgb(70, 170, 120);
+    --reject-btn-background-color:rgb(160, 40, 40);
+    --complete-btn-background-color:rgb(255, 125, 80);
+    /*links,submit,button,searchbar,input*/
 }

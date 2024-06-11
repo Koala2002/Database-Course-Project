@@ -11,14 +11,18 @@
     <link rel="stylesheet" href="CSS/MainPage.css">
     <link rel="stylesheet" href="CSS/GoodsList.css">
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="JavaScript/HeaderBuilder.js"></script>
     <script type="text/javascript" src="JavaScript/MainPageProcessor.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="JavaScript/TabViewButtonProcessor.js"></script>
+    <script type="text/javascript" src="JavaScript/GoodsListProcessor.js"></script>
+    
 
     <title>School Book Store</title>
 </head>
 
 <body>
+    <script>CartChecker();</script>
     <div id="header">
         <?php
             if(CheckLogin($loginsys))echo "<script>UserLoginHeaderBuild('','PHP/');</script>";
@@ -38,9 +42,9 @@
         <div class="ViewTabBlock MainPage-ViewTabBlock">
             <?php SearchPageBuild($bookstore,$goodslistData);?>
             <script>
+                tabButtonSetting("tab-btn","MainPage-tab-btn-bar","goodslist-view-tab-","MainPage");
                 tabInit();
-                tabButtonSetting();
-                GoodsSetting();
+                GoodsSetting("MainPage");
             </script>
         </div>
     </div>

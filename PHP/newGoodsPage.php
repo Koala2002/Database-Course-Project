@@ -13,14 +13,17 @@
     <link rel="stylesheet" href="../CSS/newGoodsPage.css">
     <link rel="stylesheet" href="../CSS/GoodsList.css">
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="../JavaScript/HeaderBuilder.js"></script>
     <script type="text/javascript" src="../JavaScript/newGoodsProcessor.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="../JavaScript/TabViewButtonProcessor.js"></script>
+    
 
     <title>School Book Store</title>
 </head>
 
 <body>
+    <script>CartChecker();</script>
     <div id="header">
         <script>UserLoginHeaderBuild('../','');</script>
     </div>
@@ -38,6 +41,5 @@
             <input type="submit" name="UploadButton" id="UploadButton" value="Upload">            
         </form>
     </div>
-
 </body>
 </html>

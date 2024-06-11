@@ -1,0 +1,216 @@
+@import url("Theme.css");
+
+#Cart-List-Block{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: left;
+
+    position: absolute;
+    top:calc(50px + 4vh);
+    left:10vw;
+
+    width:calc(80vw - 25px);
+    height: calc(92vh - 50px);
+
+    padding-right: 25px;
+
+    border-radius: 25px;
+
+    background-color: var(--websitesecondColor);
+
+    box-shadow: var(--contentBlock-shadow);
+   
+    user-select: none;
+
+    box-sizing: border-box;
+}
+
+.table-Block{
+    height: calc(92vh - 50px);
+    overflow-x:none;
+    overflow-y: auto;
+}
+
+
+#Cart-List{
+    display: flex;
+    flex-direction: column;
+
+    padding-bottom: 30px;
+   
+    height: calc(92vh - 50px);
+    overflow-y: auto;
+
+    border-radius: 25px 0 0 25px;
+}
+
+thead{
+    width: calc(50vw + 25px);
+    background-color: var(--websitethirdColor);
+    color: var(--websitesecondColor);
+    font-size: 1.25em;
+    font-weight: bold; 
+}
+
+#cart-list-top-header{
+    position: sticky;
+    top: 0;
+    border-radius: 25px 0 25px 0;
+}
+
+#cart-list-bottom-header{
+    position: fixed;
+    bottom: 4vh;
+    border-radius: 0 25px 0 25px ;
+
+}
+
+tbody{
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+thead,tr{
+    display: flex;
+
+
+}
+
+td{
+    border-bottom: 1px var(--websitebackground-color) solid ;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+
+
+
+th{
+    
+    border-left: 1px white solid ;
+
+    box-sizing: border-box;
+}
+th:first-child{
+    
+    border-left:none;
+}
+
+thead .goods-totalbooks,thead .goods-allgoodstotalprice{
+    width:calc(50vw * 0.5);
+    
+    display: flex;
+    justify-content: left;
+
+    padding-left: 25px;
+    box-sizing: border-box;
+}
+
+tbody .goods-del-btn-Block,thead .goods-del-btn-Block{width:calc(50vw * 0.075);}
+tbody .goods-edit-btn-Block,thead .goods-edit-btn-Block{width:calc(50vw * 0.075);}
+tbody .goods-id,thead .goods-id{width:calc(50vw * 0.125);}
+tbody .goods-name,thead .goods-name{width:calc(50vw * 0.2);}
+tbody .goods-require,thead .goods-require{width:calc(50vw * 0.2);}
+tbody .goods-price,thead .goods-price{width:calc(50vw * 0.1);}
+tbody .goods-number,thead .goods-number{width:calc(50vw * 0.1);}
+tbody .goods-totalprice,thead .goods-totalprice{width:calc(50vw * 0.125);}
+
+/*
+tbody .goods-del-btn-Block{width:60px;}
+tbody .goods-edit-btn-Block{width:60px;}
+tbody .goods-id{width:100px;}
+tbody .goods-name{width:200px;}
+tbody .goods-require{width:200px;}
+tbody .goods-price{width:80px;}
+tbody .goods-number{width:80px;}
+tbody .goods-totalprice{width:100px;}
+*/
+tbody .goods-id,
+tbody .goods-price,
+tbody .goods-number,
+tbody .goods-totalprice,
+tbody .goods-del-btn-Block,
+tbody .goods-edit-btn-Block{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#Order-Upload-Button,#Cart-Clear-Button{
+    
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+   
+    position: absolute;
+
+    right: 25px;
+
+    width: 100px;
+    height: 40px;
+
+    background-color: var(--linkBackground-color);
+
+    border: none;
+    border-radius: 100px;
+
+    font-size: 1em;
+
+    color:var(--linkText-color);
+    text-decoration:none;
+
+    user-select: none;
+
+    box-shadow: var(--linkshadow);
+
+    &:hover{
+        background-color:  var(--linkBackground-hover-color);
+        cursor:pointer;
+    }
+}
+
+#Order-Upload-Button{bottom: 25px;}
+
+#Cart-Clear-Button{
+    background-color:var(--reject-btn-background-color);
+    top: 25px;
+}
+
+tbody .goods-del-btn,
+tbody .goods-edit-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 50px;
+    height: 40px;
+
+    background-color: var(--linkBackground-color);
+
+    border: none;
+    border-radius: 100px;
+
+    font-size: 1em;
+
+    color:var(--linkText-color);
+    text-decoration:none;
+
+    user-select: none;
+
+    box-shadow: var(--linkshadow);
+
+    &:hover{
+        background-color:  var(--linkBackground-hover-color);
+        cursor:pointer;
+    }
+}
+
+.cart-list-detail-page{
+    
+    width: calc(50vw * 0.85 + 25px);
+}

@@ -11,12 +11,12 @@
     
     #HomeLink{
         position:absolute;
-        left:calc(50vw - 50px);
+        left:calc(50vw - 75px);
     }
     
     #newGoodsLink{
         position:absolute;
-        left:calc(50vw + 75px);
+        left:calc(50vw + 50px);
     }
 }
 
@@ -24,32 +24,38 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-
     position: absolute;
     top:0;
     left: 0;
-    width: calc(100vw - 50px);
+    width: 100vw;
     height:50px;
 
     padding-right: 25px;
     padding-left: 25px;
 
-    background-color: var(--websitesecondColor);
+   
 
-    box-shadow: var(--contentBlock-shadow);
+    box-sizing: border-box;
+
+    
 
     user-select: none;
 
-    z-index: 2;
+    
 }
 
-#header label{
+#header-bar{
     position: absolute;
-    left: 25px;
 
-    font-size: 1.5em;
-    
-    line-height: 1.5em;
+    top:0;
+    left:0;
+
+    width: 100vw;
+    height:50px;
+    background-color: var(--websitesecondColor);
+    box-shadow: var(--contentBlock-shadow);
+
+    z-index: 10;
 }
 
 #header a,#header button{
@@ -77,9 +83,27 @@
     }
 }
 
+#header #System-Title{
+    position: absolute;
+    left: 0;
+
+    font-size: 1.5em;
+    
+    line-height: 1.5em;
+
+    background-color: transparent;
+    box-shadow: none;
+
+    color:var(--websitebackground-color);
+
+    z-index: 20;
+}
+
 #HomeLink,#UserPageLink,#LoginLink,#LogoutLink{
     width: 100px;
     height: 35px;
+
+    z-index: 20;
 }
 
 #newGoodsLink,#MailBoxBtn{
@@ -87,30 +111,38 @@
     height: 35px;
 
     border:none;
+    z-index: 20;
 }
 
-
-@keyframes MailBoxAnimation{
-    0%{
-        height: 0;
-    }
-    100%{
-        height:300px;
-    }
-}
 
 #MailBox{
     position: absolute;
     top:50px;
-    right:200px;
+    right:262.5px;
 
-    display:none;
+    display:flex;
 
-    width:250px;
-    height: 300px;
+    height: 0;
+    width:375px;
+    padding-left:10px;
+    padding-right:10px;
 
+    box-sizing: border-box;
 
-    background-color: brown;
+    border-radius: 0 0 25px 25px;
 
-    animation: MailBoxAnimation 0.5s;
+    background-color: var(--websitesecondColor);
+    box-shadow: var(--MailBoxShadow);
+    transition: height 0.25s,padding 0.25s;
+
+    z-index: 5;
+}
+
+#mailContentContainer{
+    width:375px;
+    background-color: var(--websitebackground-color);
+    
+    box-shadow: var(--MailBoxContentShadow);
+
+    border-radius: 0 0 15px 15px;
 }

@@ -110,6 +110,19 @@
     hyphens: auto;
 }
 
+#Book-UserID-Block a{
+    transition: all 0.1s;
+
+    font-size: 1em;
+    color:var(--textlink-color);
+   
+    text-decoration: none;
+
+    &:hover{
+        text-decoration:underline;
+        cursor:pointer;
+    }
+}
 
 #Book-User-INF-Block{
     display: flex;
@@ -118,14 +131,80 @@
     flex-direction: column;
 
     height:calc(92vh - 150px);
-    width: calc((80vw - 100px) * 0.2);
-    background-color: aquamarine;
+    width: calc((80vw - 75px) * 0.2);
 
-    padding: 25px;
+
+    padding-left: 25px;
+    padding-top: 25px;
+    padding-bottom: 25px;
 }
 
 #Book-UserID-Block{
 
+}
+
+#Order-Block{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    width: calc((80vw - 75px) * 0.2);
+
+
+    
+    margin-top: 25px;
+}
+
+#order-require-input{
+    width: calc((80vw - 75px) * 0.2);
+    height: 200px;
+
+    margin-top: 30px;
+
+    padding: 20px;
+
+    border-radius:25px;
+
+    background-color:var(--input-background-color);
+
+    user-select: none;
+
+    border:none;
+    outline: none;
+    resize:none;
+
+    box-sizing: border-box;
+
+    &:focus{
+        border:2px solid var(--websitebackground-color);
+    }
+}
+
+
+
+#button-number-block{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    
+    height: 35px;
+
+}
+
+#order-number-input{
+    width: 45px;
+    height: 25px;
+
+    font-size: 1em;
+    line-height: 1em;
+    border:none;
+    
+    border-radius: 5px;
+    background-color:var(--input-background-color);
+    padding: 5px;
 }
 
 #Book-Order-Button{
@@ -139,7 +218,7 @@
     border:none;
     border-radius: 30px;
 
-    width: 150px;
+    width: calc((80vw - 75px) * 0.2 - 80px);
     height: 35px;
 
     font-size: 1em;
@@ -151,7 +230,7 @@
 
     box-shadow: var(--linkshadow);
 
-    margin-top: 25px;
+    margin-left: 10px;
 
     &:hover{
         background-color:  var(--linkBackground-hover-color);

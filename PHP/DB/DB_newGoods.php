@@ -131,11 +131,11 @@
                     <button class='EditBookInf-Btn' id='EBI-Btn-$item_id'>🖊️</button>
                     
                     <div class='Book-Name-Block NewGoods-Book-Name-Block' id='item-name-$item_id'>$BookName</div>
-                    <div class='Book-ISBN-Block NewGoods-Book-ISBN-Block' id='item-ISBN-$item_id'>ISBN：$ISBN</div>
+                    <div class='Book-ISBN-Block NewGoods-Book-ISBN-Block' id='item-ISBN-$item_id'>ISBN:$ISBN</div>
                     
                     <div class='Book-Number-Price-Description-Block'>
                         <div class='Book-Number-Price-Block'>          
-                            <div class='Book-Number-Block NewGoods-Book-Number-Block' id='item-num-$item_id'>剩餘：$BookNum</div>
+                            <div class='Book-Number-Block NewGoods-Book-Number-Block' id='item-num-$item_id'>剩餘:$BookNum</div>
                             <div class='Book-Price-Block NewGoods-Book-Price-Block' id='item-price-$item_id'>$$BookPrice</div>      
                         </div>
                         <div class='Book-Description-Block NewGoods-Book-Description-Block' id='item-description-$item_id'>$BookDescription</div>
@@ -153,13 +153,17 @@
         
         echo "</div>";
 
-        echo "<div class='tab-btn-bar NewGoods-tab-btn-bar'>";
+        echo "<div class='tab-btn-bar' id='NewGoods-tab-btn-bar'>";
 
         for($tabid=0;$tabid<$TabNum;$tabid++){
             $vis_id=$tabid+1;
-            echo "<button class='tab-btn' id='tab-btn-$tabid'>$vis_id</button>";
+            echo "<button class='tab-btn' id='NewGoodsPage-tab-btn-$tabid'>$vis_id</button>";
         }
 
-        echo "<script>TabSetting($TabNum);</script>";
+        echo "
+        <script>
+            tabButtonSetting('tab-btn','NewGoods-tab-btn-bar','tab-','NewGoodsPage');
+            TabSetting($TabNum);
+        </script>";
     }
 ?>

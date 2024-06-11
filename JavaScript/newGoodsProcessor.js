@@ -5,7 +5,7 @@ function isAllAlphaDigit(str){return /^[a-zA-Z0-9]+$/.test(str);}
 function ISBN_CHECK(id){
     var isbn=document.getElementById("ISBN_VAL").value;
     
-    var Key_Index=window.location.href.indexOf("&ISBN["+id+"]=");
+    var Key_Index=window.location.search.indexOf("&ISBN["+id+"]=");
 
     if(isbn.length<13)return "Length Invalid";
     
@@ -19,7 +19,7 @@ function ISBN_CHECK(id){
 
 
 function NextState(id,oldstate,newstate,value){
-    let Key_Index=window.location.href.indexOf("&State=");
+    let Key_Index=window.location.search.indexOf("&State=");
     
     let stateInf="&State="+newstate;
     
@@ -43,16 +43,16 @@ function NextState(id,oldstate,newstate,value){
         }
     }
     else if(oldstate==1&&newstate==2){
-        window.location.href =  window.location.href.substring(0, Key_Index) +
+        window.location.search =  window.location.search.substring(0, Key_Index) +
                                 stateInf +
-                                window.location.href.substring(Key_Index+8,window.location.href.length)+
+                                window.location.search.substring(Key_Index+8,window.location.search.length)+
                                 "&ISBN["+id+"]="+
                                 value[0]; 
     }
     else if(oldstate==1&&newstate==3){
-        window.location.href =  window.location.href.substring(0, Key_Index) +
+        window.location.search =  window.location.search.substring(0, Key_Index) +
                                 stateInf +
-                                window.location.href.substring(Key_Index+8,window.location.href.length) +
+                                window.location.search.substring(Key_Index+8,window.location.search.length) +
                                 "&ISBN["+id+"]="+
                                 value[0]+
                                 "&BookName["+id+"]=" +
@@ -62,9 +62,9 @@ function NextState(id,oldstate,newstate,value){
         let name=document.getElementById("BookName_VAL").value;
         if(name.length<1)return;
 
-        window.location.href =  window.location.href.substring(0, Key_Index) +
+        window.location.search =  window.location.search.substring(0, Key_Index) +
                                 stateInf +
-                                window.location.href.substring(Key_Index+8,window.location.href.length) +
+                                window.location.search.substring(Key_Index+8,window.location.search.length) +
                                 "&BookName["+id+"]=" +
                                 name;
     }
@@ -72,9 +72,9 @@ function NextState(id,oldstate,newstate,value){
         let num=document.getElementById("BookNum_VAL").value;
         if(!isAllDigit(num)||parseInt(num)>100||parseInt(num)<1)return;
 
-        window.location.href =  window.location.href.substring(0, Key_Index) +
+        window.location.search =  window.location.search.substring(0, Key_Index) +
                                 stateInf +
-                                window.location.href.substring(Key_Index+8,window.location.href.length) +
+                                window.location.search.substring(Key_Index+8,window.location.search.length) +
                                 "&BookNum["+id+"]=" +
                                 num;    
     }
@@ -82,9 +82,9 @@ function NextState(id,oldstate,newstate,value){
         let price=document.getElementById("BookPrice_VAL").value;
         if(!isAllDigit(price)||parseInt(price)>10000||parseInt(price)<0)return;
     
-        window.location.href =  window.location.href.substring(0, Key_Index) +
+        window.location.search =  window.location.search.substring(0, Key_Index) +
                                 stateInf +
-                                window.location.href.substring(Key_Index+8,window.location.href.length)  +
+                                window.location.search.substring(Key_Index+8,window.location.search.length)  +
                                 "&BookPrice["+id+"]=" +
                                 price;
     }
@@ -93,14 +93,14 @@ function NextState(id,oldstate,newstate,value){
         
         if(description.length>100)return;
 
-        var GoodsNum_Index=window.location.href.indexOf("GoodsNum=");
+        var GoodsNum_Index=window.location.search.indexOf("GoodsNum=");
         
-        window.location.href =  window.location.href.substring(0, GoodsNum_Index) +
+        window.location.search =  window.location.search.substring(0, GoodsNum_Index) +
                                 "GoodsNum=" +
                                 (id+1) +
-                                window.location.href.substring(GoodsNum_Index+10+(id+1)/10, Key_Index) +
+                                window.location.search.substring(GoodsNum_Index+10+(id+1)/10, Key_Index) +
                                 stateInf +
-                                window.location.href.substring(Key_Index+8,window.location.href.length) +
+                                window.location.search.substring(Key_Index+8,window.location.search.length) +
                                 "&BookDescription["+id+"]=" +
                                 description;
     }
@@ -115,18 +115,17 @@ function GoodsItemSetting(ISBN,Name,Num,Price){
 var TabNow=0;
 
 function TabSetting(tabcnt){
+    if(window.location.hash=="")window.location.hash="NewGoodsPage-0";
+    
+    
     TabNow=tabcnt-1;
     console.log(TabNow);
     for(let id=0;id<tabcnt;id++){
         if(id!=TabNow)document.getElementById("tab-"+id).style.display = "none";
         else  document.getElementById("tab-"+id).style.display="flex";
-
-        document.getElementById("tab-btn-"+id).addEventListener("click",()=>{
-            document.getElementById("tab-"+TabNow).style.display="none";
-            
-            document.getElementById("tab-"+id).style.display="flex";
-        
-            TabNow=id;
-        });
     }
+
+    let urlhash=window.location.hash.slice(1).split("-");
+    console.log(urlhash[0]+"-tab-btn-"+urlhash[1]);
+    document.getElementById(urlhash[0]+"-tab-btn-"+urlhash[1]).click();
 }

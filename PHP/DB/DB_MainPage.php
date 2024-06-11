@@ -2,18 +2,94 @@
     require_once("DB_Common.php");
 
     /*fetch all goods from database*/
-    $result=mysqli_query($bookstore,"SELECT * FROM goods");
+    $SQL="";
     
     $goodslistData=array();
     
-    while($row=mysqli_fetch_array($result))array_push($goodslistData,$row);
+    if(isset($_GET["Search"])){
+        
+        $sql_data=SearchStatement_ToSQL($_GET["Search"]);
+        
+        for($id=0;$id<count($sql_data);$id++){
+            
+            $SQL.= $sql_data[$id];
+            if($id==count($sql_data)-1)continue;
+            $SQL.= " UNION ";
+        }
+    }
+    else $SQL="SELECT * FROM goods WHERE number>0";
+
+    
+
+    $result=mysqli_query($bookstore,$SQL);
+    while($result&&$row=mysqli_fetch_array($result))array_push($goodslistData,$row);
     /*fetch all goods from database*/
 
 
     function SearchStatement_ToSQL($SearchStatement) {//查詢轉換
-        $sql="";
+        $sql=array();
+        
+        $SearchStatement=explode(" ",$SearchStatement);
 
+       
+        $all_chinese = "/^[\x{4e00}-\x{9fa5}]+$/u";
+        $all_alpha="/^[a-zA-z]+$/";
+        $all_digit="/^[0-9]{13}$/";
+        
+        foreach($SearchStatement as $str) {
+            $SQL_Query="(";
+            if(preg_match($all_chinese,$str)){//科系、教授名稱
+                $statement1="
+                    (SELECT * FROM goods
+                    WHERE number>0 AND goods.isbn IN (
+                        SELECT course.isbn FROM course
+                        WHERE course.isbn IS NOT NULL AND course.dep_id=(
+                            SELECT department.dep_id FROM department WHERE department.dep_name='$str'
+                        )
+                    ))
+                ";
 
+                $statement2="
+                    (SELECT * FROM goods
+                    WHERE number>0 AND goods.isbn IN (
+                        SELECT course.isbn FROM course
+                        WHERE course.isbn IS NOT NULL AND course.ins_id=(
+                            SELECT instructor.ins_id FROM instructor WHERE instructor.ins_name='$str'
+                        )
+                    ))
+                ";
+
+                $SQL_Query.=$statement1." UNION ".$statement2;
+            }
+            else if(preg_match($all_alpha,$str)){//教授名稱
+                $statement="
+                    (SELECT * FROM goods
+                    WHERE number>0 AND goods.isbn IN (
+                        SELECT course.isbn FROM course
+                        WHERE course.isbn IS NOT NULL AND course.ins_id=(
+                            SELECT instructor.ins_id FROM instructor WHERE instructor.ins_name='$str'
+                        )
+                    ))
+                ";
+
+                $SQL_Query.=$statement;
+            }
+            else if(preg_match($all_digit,$str)){//ISBN
+                $statement="
+                    (SELECT * FROM goods WHERE number>0 AND goods.isbn=$str)
+                ";
+                
+                $SQL_Query.=$statement;
+            }
+
+            $statement="
+                (SELECT * FROM goods WHERE number>0 AND goods.goods_name LIKE '%$str%')
+            ";
+            
+            if(strlen($SQL_Query)>1)$SQL_Query.=" UNION ".$statement.")";
+            else $SQL_Query.= $statement.")";
+            array_push($sql,$SQL_Query);
+        }
 
         return $sql;
     }
@@ -56,11 +132,11 @@
 
     
         echo "</div>";
-        echo "<div class='tab-btn-bar MainPage-tab-btn-bar'>";
+        echo "<div class='tab-btn-bar' id='MainPage-tab-btn-bar'>";
         
         for( $id= 0; $id<$tabnum; $id++ ){
             $vis_id=$id+1;
-            echo "<button class='tab-btn' id='goodslist-tab-btn-$id'>$vis_id</button>";
+            echo "<button class='tab-btn' id='MainPage-tab-btn-$id'>$vis_id</button>";
         }
     }
 ?>

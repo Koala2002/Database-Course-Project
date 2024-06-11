@@ -1,38 +1,19 @@
-var tabNow=0;
-
 function tabInit(){
+    if(window.location.hash==="")window.location.hash="MainPage-0";
+    
+    let urlhash=window.location.hash;//url hash
+    urlhash=urlhash.slice(1).split('-');
+    
     let tabs=document.getElementsByClassName("ViewTab");
     for(let id=0;id<tabs.length;id++){
-        if(id>0)tabs[id].style.display="none";
+        if(id!=urlhash[1])tabs[id].style.display="none";
         else tabs[id].style.display="flex";
     }
+
+    document.getElementById("MainPage-tab-btn-"+urlhash[1]).click();
 }
-
-function tabButtonSetting(){
-    let btns=document.getElementsByClassName("tab-btn");
-
-    for(let id=0; id<btns.length;id++){
-        btns[id].addEventListener("click",()=>{
-            document.getElementById("goodslist-view-tab-"+tabNow).style.display="none";
-            tabNow=id;
-            document.getElementById("goodslist-view-tab-"+tabNow).style.display="flex";
-        });
-    }
-}
-
-function GoodsSetting(){
-    let goods=document.getElementsByClassName("goods-item-Block");
-
-    $.get(
-        '../PHP/API/API_GoodsQueryALL.php',
-    )
-    .done((data)=>{
-        for(let id=0;id<goods.length;id++){
-            goods[id].addEventListener("click",()=>{
-                window.location.href="../PHP/BookPage.php?GoodsID="+data["GoodsData"][id]["goods_id"];
-            });
-        }})
-    .fail((data)=>{
-        console.log("In File MainPageProcessor.js GoodsSetting(Query) API fail");
+window.onload=()=>{
+    document.getElementById("search").addEventListener("submit",()=>{
+        history.replaceState(null, null, window.location.pathname + window.location.search);
     });
 }

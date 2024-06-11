@@ -11,9 +11,11 @@
         }
     }
 
-    function userLogin($db,$account,$password){
-        if (!mysqli_connect('localhost',$account,$password,'bookstore'))return false;
+    function userLogin($db,$account,$password,$verifyCode){
+        if($_SESSION["v-code"]!=$verifyCode)return "verify-error";
+        else if (!mysqli_connect('localhost',$account,$password,'bookstore'))return "login-error";
         else{
+
             $ipaddress=$_SERVER['REMOTE_ADDR'];//使用者登入ip
            
             clearIPLogin($db,$ipaddress);
@@ -22,36 +24,7 @@
             
             if(!mysqli_query($db,$inf_upd))echo "testing";
 
-            return true;
-        }
-    }
-    function createUser($bookstoredb,$sysdb,$account,$password,$nickname,$phonenumber){
-        $useraccount=mysqli_query($bookstoredb,"SELECT user_id FROM user WHERE user_id='$account'");
-
-
-        if(mysqli_num_rows($useraccount))return false;
-        else{
-            $sql="CREATE USER '{$account}'@'localhost' IDENTIFIED BY '{$password}'";
-            
-            echo "testing testing testing";
-
-            if (mysqli_query($bookstoredb,$sql)){
-                mysqli_query($bookstoredb,"GRANT ALL PRIVILEGES ON bookstore.* TO '$account'@'localhost'");
-                mysqli_query($bookstoredb,"INSERT INTO user VALUES('$account','$nickname','1','$phonenumber')");
-
-                $ipaddress=$_SERVER['REMOTE_ADDR'];
-                
-                
-                $inf_add="INSERT INTO login_inf VALUES('$account','$password','$ipaddress',0)";
-                
-
-                clearIPLogin($sysdb,$ipaddress);
-              
-                mysqli_query($sysdb,$inf_add);
-                
-                return true;
-            }
-            else return false;
+            return "success";
         }
     }
 ?>

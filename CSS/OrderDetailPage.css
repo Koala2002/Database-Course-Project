@@ -1,0 +1,175 @@
+@import url(Theme.css);
+
+#Detail-Block{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: left;
+
+    position: absolute;
+    top:calc(50px + 4vh);
+    left:10vw;
+
+    width:80vw;
+    height: calc(92vh - 50px);
+
+    padding-right: 25px;
+
+    border-radius: 25px;
+
+    background-color: var(--websitesecondColor);
+
+    box-shadow: var(--contentBlock-shadow);
+   
+    user-select: none;
+
+    box-sizing: border-box;
+}
+
+
+#Order-Detail-State-Chat-Block{
+    position: absolute;
+    top:25px;
+    right:25px;
+
+    display: flex;
+    flex-wrap: wrap;
+   
+    flex-direction: column;
+
+   
+    width:calc(80vw - (50vw * 0.85 + 25px) - 60px);
+    height:calc(92vh - 100px);
+
+
+    box-sizing: border-box;
+
+    border-radius: 15px;
+}
+
+#Order-Detail-State-Block{
+    position: absolute;
+    top: 0;
+
+    display: flex;
+    flex-wrap: wrap;
+
+    align-items: center;
+    flex-direction: column;    
+   
+
+    width:calc(80vw - (50vw * 0.85 + 25px) - 60px);
+    height:calc((92vh - 100px) / 2);
+
+    
+
+    box-sizing: border-box;
+}
+
+#Order-Detail-Chat-Block{
+    display: flex;
+    flex-wrap: wrap;
+  
+    flex-direction: column;
+
+    position: absolute;
+    bottom:0;
+
+    width:calc(80vw - (50vw * 0.85 + 25px) - 60px);
+    height:calc((92vh - 100px) / 2);
+
+
+    box-sizing: border-box;
+}
+
+/*State Block*/
+#Order-State-UserID-Block{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  
+    width:calc(80vw - (50vw * 0.85 + 25px) - 60px);
+    height:calc((92vh - 100px) / 2 * 0.2);
+}
+
+#Order-State-Block{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  
+    padding: 25px;
+
+    width:calc(80vw - (50vw * 0.85 + 25px) - 60px);
+    height:calc((92vh - 100px) / 2 * 0.8);
+    
+  
+    box-sizing: border-box;
+}
+
+.Order-List-Btn{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    bottom: 25px;
+
+    border:none;
+    border-radius: 30px;
+
+    width: 60px;
+    height: 30px;
+
+    
+    font-size: 1em;
+
+    color:var(--linkText-color);
+    text-decoration:none;
+
+    user-select: none;
+
+    box-shadow: var(--linkshadow);
+
+    &:hover{
+        background-color:  var(--linkBackground-hover-color);
+        cursor:pointer;
+    }
+}
+
+.ord-list-btn-accept{
+    background-color: var(--accept-btn-background-color);
+    right: 95px;
+}
+.ord-list-btn-reject,.ord-list-btn-terminate{
+    background-color: var(--reject-btn-background-color);
+    right: 25px;
+}
+.ord-list-btn-complete{
+    background-color: var(--complete-btn-background-color);
+    right: 95px;
+}
+
+
+#chat-Block{
+    width:calc(80vw - (50vw * 0.85 + 25px) - 60px);
+    height:calc((92vh - 100px) / 2 * 0.5);
+
+    padding: 20px;
+
+    border-radius:25px;
+
+    background-color:var(--input-background-color);
+
+    user-select: none;
+
+    border:none;
+    outline: none;
+    resize:none;
+    box-sizing: border-box;
+    &:focus{
+        border:2px solid var(--websitebackground-color);
+      
+    }
+}
