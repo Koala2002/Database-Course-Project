@@ -1,6 +1,6 @@
 <?php
-    $path=getcwd();
-    require_once($path."/DB/DB_USER.php");            
+
+    require_once("DB/DB_USER.php");            
 ?>
 <!DOCTYPE html>
 <html lang="zh_TW">

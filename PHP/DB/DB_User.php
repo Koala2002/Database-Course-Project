@@ -1,6 +1,6 @@
 <?php
-    $path=getcwd();
-    require_once($path."/DB_Common.php");
+
+    require_once("DB_Common.php");
  
     $LoginUserInf=GetLoginUser($loginsys);
 
