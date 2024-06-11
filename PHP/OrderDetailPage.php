@@ -1,6 +1,7 @@
 <?php
-    require_once("PHP//DB//DB_Common.php");
-    require_once("PHP//DB//DB_OrderDetail.php");
+    $path=getcwd();
+    require_once($path."/DB/DB_Common.php");
+    require_once($path."/DB/DB_OrderDetail.php");
     echo $_POST["OrderID"];
 ?>
 

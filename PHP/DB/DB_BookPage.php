@@ -1,5 +1,6 @@
 <?php
-    require_once("PHP//DB//DB_Common.php");
+    $path=getcwd();
+    require_once($path."/DB_Common.php");
 
     $bookinf=mysqli_query($bookstore,"SELECT * FROM goods WHERE goods_id = $_GET[GoodsID]");
     $bookinf=mysqli_fetch_array($bookinf);

@@ -1,5 +1,6 @@
 <?php
-    require_once("PHP//DB//DB_Common.php");
+    $path=getcwd();
+    require_once($path."/DB/DB_Common.php");
     
 ?>
 <!DOCTYPE html>

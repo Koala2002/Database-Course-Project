@@ -1,5 +1,6 @@
 <?php
-    require_once("PHP//DB//DB_BookPage.php");
+    $path=getcwd();
+    require_once($path."/DB/DB_BookPage.php");
 
     if(isset($cart)){
         echo "<script>have cart</script>";

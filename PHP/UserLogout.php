@@ -2,7 +2,8 @@
 
 
 <?php
-    require_once("PHP//DB//DB_Common.php");    
+    $path=getcwd();
+    require_once($path."/DB_Common.php");    
     UserLogout($loginsys);
 ?>
 <script>
