@@ -11,8 +11,21 @@
 
     $result;
 
+    function logintest($db,$loginuser_account,$loginuser_password){
+        $accountData = mysqli_query($db,"SELECT * FROM login_inf WHERE user_id='{$loginuser_account}'");
+        if($accountData){
+            $accountData=mysqli_fetch_array($accountData);
+            if(!$accountData)return false;
+            
+            if($accountData["password"]===$loginuser_password)return true;
+        
+            return false;
+        }
+        else return false;
+    }
+
     if($_SESSION["v-code"]!=$loginuser_vcode)$result="verify-error";
-    else if (!mysqli_connect('localhost',$loginuser_account,$loginuser_password,'bookstore'))$result="login-error";
+    else if (!logintest($loginsys,$loginuser_account,$loginuser_password))$result="login-error";
     else{
         $ipaddress=$_SERVER['REMOTE_ADDR'];//使用者登入ip
         
