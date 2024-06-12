@@ -23,6 +23,8 @@ function TabInit(){
     for(let id=1;id<=3;id++){
         let viewbtn=document.getElementById("ViewChange-Btn-"+id);
 
+        if(!viewbtn)continue;
+
         viewbtn.addEventListener("mouseover",()=>{
             if(id==ViewNow)viewbtn.style.backgroundColor="var(--btnPageNow-Hover-backgroundColor)";
             else viewbtn.style.backgroundColor="var(--linkBackground-hover-color)";

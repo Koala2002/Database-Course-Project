@@ -1,6 +1,6 @@
 <?php
 
-    require_once("DB/DB_USER.php");            
+    require_once("DB/DB_User.php");            
 ?>
 <!DOCTYPE html>
 <html lang="zh_TW">
