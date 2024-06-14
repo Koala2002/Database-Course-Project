@@ -39,10 +39,22 @@ CREATE TABLE `login_inf` (
 LOCK TABLES `login_inf` WRITE;
 /*!40000 ALTER TABLE `login_inf` DISABLE KEYS */;
 INSERT INTO `login_inf` VALUES
-('','',NULL,'0'),
-('test2','012345',NULL,'0'),
-('testing','012345',NULL,'0'),
-('WU41043117','WU20021111','::1','0');
+('AaBb@1','AaBb@1',NULL,'0'),
+('AaBb@10','AaBb@10',NULL,'0'),
+('AaBb@11','AaBb@11',NULL,'0'),
+('AaBb@12','AaBb@12',NULL,'0'),
+('AaBb@13','AaBb@13',NULL,'0'),
+('AaBb@14','AaBb@14',NULL,'0'),
+('AaBb@15','AaBb@15',NULL,'0'),
+('AaBb@16','AaBb@16',NULL,'0'),
+('AaBb@2','AaBb@2',NULL,'0'),
+('AaBb@3','AaBb@3',NULL,'0'),
+('AaBb@4','AaBb@4',NULL,'0'),
+('AaBb@5','AaBb@5',NULL,'0'),
+('AaBb@6','AaBb@6',NULL,'0'),
+('AaBb@7','AaBb@7',NULL,'0'),
+('AaBb@8','AaBb@8',NULL,'0'),
+('AaBb@9','AaBb@9',NULL,'0');
 /*!40000 ALTER TABLE `login_inf` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +67,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-11 12:10:55
+-- Dump completed on 2024-06-14 23:56:36
