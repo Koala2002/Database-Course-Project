@@ -78,12 +78,18 @@ function ViewChange(view){
     viewbtn.style.backgroundColor="var(--websitethirdColor)";
     
 
-    document.getElementById("goodslist-sub-view-tab-"+subview[0]).style.display="none";
-    document.getElementById("curorder-sub-view-tab-"+subview[1]).style.display="none";
-    subview[0]=subview[1]=subview[2]=0;
-    document.getElementById("goodslist-sub-view-tab-"+subview[0]).style.display="flex";
-    document.getElementById("curorder-sub-view-tab-"+subview[1]).style.display="flex";
+    let GoodsListSubViewTab=document.getElementById("goodslist-sub-view-tab-"+subview[0]);
+    if(GoodsListSubViewTab)GoodsListSubViewTab.style.display="none";
+    let CurOrderSubViewTab=document.getElementById("curorder-sub-view-tab-"+subview[1]);
+    if(CurOrderSubViewTab)CurOrderSubViewTab.style.display="none";
+    let HistoryOrderSubViewTab=document.getElementById("historyorder-sub-view-tab-"+subview[2]);
+    if(HistoryOrderSubViewTab)HistoryOrderSubViewTab.style.display="none";
 
+    subview[0]=subview[1]=subview[2]=0;
+    if(GoodsListSubViewTab)GoodsListSubViewTab.style.display="flex";
+    if(CurOrderSubViewTab)CurOrderSubViewTab.style.display="flex";
+    if(HistoryOrderSubViewTab)HistoryOrderSubViewTab.style.display="flex";
+    
     document.getElementById("main-view-tab-"+view).style.display="flex";
     document.getElementById("tab-btn-bar-"+view).style.display="flex";
 }

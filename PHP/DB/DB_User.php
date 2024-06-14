@@ -13,7 +13,6 @@
 
     function UserInfBuild($db){
         $data=UserInf($db,$_GET["UserID"]);
-
         echo "
             <label class='labelTitle'>ID</label><label class='labelContent'>$_GET[UserID]</label>
             <label class='labelTitle'>暱稱</label><label class='labelContent'>{$data["user_name"]}</label>

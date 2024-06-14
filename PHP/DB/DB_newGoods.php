@@ -1,27 +1,28 @@
 <?php
-    function GoodsUpload($db,$loginsys){
-        if($_GET["GoodsNum"]==0)return;
+    function GoodsUpload($db, $loginuser, $loginsys) {
+        if ($_GET["GoodsNum"] == 0) return;
 
-        $LoginUserInf=$loginuser;
-        
-        for($id=0;$id<$_GET["GoodsNum"];$id++){
-            $isbn=$_GET["ISBN"][$id];
-            $name=$_GET["BookName"][$id];
-            $description=$_GET["BookDescription"][$id];
-            $price=$_GET["BookPrice"][$id];
-            $num=$_GET["BookNum"][$id];
-            
-            $result=mysqli_query($db,"INSERT INTO Goods_INSERT_ViewForLoginUser (isbn,goods_name,description,user_id,price,number) VALUES(
-                '$isbn',
-                '$name',
-                '$description',
-                '$LoginUserInf[0]',
-                $price,
-                $num
+        $LoginUserInf = $loginuser;
+
+        for ($id = 0; $id < $_GET["GoodsNum"]; $id++) {
+            $isbn = $_GET["ISBN"][$id];
+            $name = $_GET["BookName"][$id];
+            $description = $_GET["BookDescription"][$id];
+            $price = $_GET["BookPrice"][$id];
+            $num = $_GET["BookNum"][$id];
+
+            $result = mysqli_query($db, "INSERT INTO Goods_INSERT_ViewForLoginUser (isbn, goods_name, description, user_id, price, number) VALUES(
+                '{$isbn}',
+                '{$name}',
+                '{$description}',
+                '{$LoginUserInf}',
+                '{$price}',
+                '{$num}'
             )");
-        }
-        
-        header("location:newGoodsPage.php?GoodsNum=0&State=0");
+            
+	}
+
+	header("location:newGoodsPage.php?GoodsNum=0&State=0");
     }
 
     function GoodsInfInputBlockContentBuild(){

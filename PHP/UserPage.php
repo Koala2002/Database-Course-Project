@@ -62,7 +62,7 @@
         tabButtonSetting("curorder-btn","tab-btn-bar-2","curorder-sub-view-tab-","CurOrder");
         tabButtonSetting("historyorder-btn","tab-btn-bar-3","historyorder-sub-view-tab-","HistoryOrder");
         TabInit();
-        GoodsSetting("UserPage");
+        GoodsSetting("UserPage",1);
         OrderDetailLinkSetting();
         OrderCheckButtonSetting();
     </script>

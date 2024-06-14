@@ -66,7 +66,7 @@ function OrderCheckButtonSetting(){
                         OrderID:id,
                         state:"complete"
                     },
-                    success:(data)=>{console.log(data);},//window.location.reload();},
+                    success:(data)=>{window.location.reload();},
                     error:(error)=>{
                         console.log(error,"In File OrderProcessor.js OrderCheckButtonSetting() API fail");
                     }

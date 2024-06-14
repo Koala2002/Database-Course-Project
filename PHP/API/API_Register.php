@@ -10,7 +10,7 @@
 
     $result=true;
 
-    $result&=mysqli_query($BookstoreUnlogin,"
+    $result&=mysqli_query($DB,"
         INSERT INTO User_INSERT_ViewForUnloginUser 
         VALUES('{$newuser_account}','{$newuser_nickname}','1','{$newuser_email}')
     ");
@@ -29,5 +29,5 @@
     $result&=mysqli_query($loginsys,$inf_add);
         
     if($result)echo json_encode(["result"=>"success"]);
-    else echo json_encode(["result"=>$BookstoreUnlogin->error]);
+    else echo json_encode(["result"=>$DB->error]);
 ?>

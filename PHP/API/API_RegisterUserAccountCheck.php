@@ -2,7 +2,7 @@
     header('Content-Type: application/json; charset=UTF-8');
     require_once("../DB/DB_Common.php");
 
-    $useraccount=mysqli_query($BookstoreUnlogin,"
+    $useraccount=mysqli_query($DB,"
         SELECT user_id 
         FROM User_SELECT_ViewForUnloginUser 
         WHERE user_id='$_POST[newaccount]'

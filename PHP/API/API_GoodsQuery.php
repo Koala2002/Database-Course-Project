@@ -7,11 +7,12 @@
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $data=array();
-        $GoodsView=(((isset($_POST["LoginState"])&&$_POST["LoginState"]=1)||!isset($_POST["LoginState"]))?
+        $GoodsView=($_POST["LoginState"]?
             "Goods_SELECT_ViewForLoginUser":
             "GoodsViewForUnloginUser"
         );
 
+	
         if($_POST["Page"]=="MainPage"){
             $result=mysqli_query($DB,"SELECT * FROM {$GoodsView} WHERE ".(isset($_GET["Search"])?$_GET["Search"]:1)." AND number>0");    
             
@@ -29,8 +30,10 @@
 
         $response = [
             "GoodsData"=>$data,
-            "result"=>$DB->error
-        ];
+            "result"=>$DB->error,
+	    "loginstate"=>$loginstate,
+	    "goodsview"=>$GoodsView
+	];
 
         echo json_encode($response);
     }

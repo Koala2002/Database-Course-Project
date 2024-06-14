@@ -3,6 +3,8 @@
     $loginstate=CheckLogin($loginsys);
     $loginuser=GetLoginUser($loginsys);
 
+
+
     $DB=$loginstate?
         mysqli_connect("localhost","LoginUser","DBCourseProject","bookstore"):
         mysqli_connect("localhost","UnloginUser","DBCourseProject","bookstore");
@@ -17,7 +19,7 @@
         
         $result=mysqli_query($db,$find_user);
 
-        if($result&&mysqli_num_rows($result))return mysqli_fetch_array($result)[0]=='1';
+        if($result&&mysqli_num_rows($result))return mysqli_fetch_array($result)["status"]='1';
 
         return false;
     }
