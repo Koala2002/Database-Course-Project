@@ -1,16 +1,24 @@
 <?php
     header('Content-Type: application/json; charset=UTF-8');
     require_once("../DB/DB_Common.php");
-    require_once("../DB/DB_UnLogin.php");
     
    
     $newuser_account=$_POST["account"];
     $newuser_password=$_POST["password"];
     $newuser_nickname=$_POST["nickname"];
     $newuser_email=$_POST["email"];
-    
+
     $result=true;
-    $result&=mysqli_query($bookstore,"INSERT INTO user VALUES('$newuser_account','$newuser_nickname','1','$newuser_email')");
+
+    $result&=mysqli_query($BookstoreUnlogin,"
+        INSERT INTO User_INSERT_ViewForUnloginUser 
+        VALUES('{$newuser_account}','{$newuser_nickname}','1','{$newuser_email}')
+    ");
+
+    if(!$result){
+        echo json_encode(["result"=>"mail exists"]);
+        return;
+    }
 
     $ipaddress=$_SERVER['REMOTE_ADDR'];
     
@@ -20,5 +28,6 @@
         
     $result&=mysqli_query($loginsys,$inf_add);
         
-    if($result)echo json_encode(["result","success"]);
+    if($result)echo json_encode(["result"=>"success"]);
+    else echo json_encode(["result"=>$BookstoreUnlogin->error]);
 ?>

@@ -183,16 +183,22 @@ function RegisterSecondState(){
     });
 }
 
+function validateEmail(email){
+    return String(email).toLowerCase().match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
+};
+
 function MailSendVerificationCode(){
     let mail=document.getElementById("mail").value;
-    let mail_regex = new RegExp("^[^\s@]+@[^\s@]+\.[^\s@]+$");
+    
     let mail_wronging_msg=document.getElementById("mail-wronging-msg");
     mail_wronging_msg.innerHTML="";
-
-    //if(!mail_regex.test(mail)){
-    //    mail_wronging_msg.innerHTML="mail格式錯誤!!!";    
-    //    return;
-    //}
+    
+    if(!validateEmail(mail)){
+        mail_wronging_msg.innerHTML="mail格式錯誤!!!";    
+        return;
+    }
 
     let link=document.getElementById("mail-vcode-resend-link");
     link.style.animation="emailSending 0.75s infinite alternate";
@@ -219,7 +225,9 @@ function MailSendVerificationCode(){
 function Register(){
     let verifycationCode=document.getElementById("mail-verifycode").value;
     let mail_vcode_wronging_msg=document.getElementById("mail-vcode-wronging-msg");
+    let mail_wronging_msg=document.getElementById("mail-wronging-msg");
 
+    mail_wronging_msg.innerHTML="";
     mail_vcode_wronging_msg.innerHTML="";
 
     $.ajax({
@@ -238,6 +246,14 @@ function Register(){
                         email:document.getElementById("mail").value
                     },
                     success:(result)=>{
+                        
+
+                        if(result["result"]=="mail exists"){
+                            mail_wronging_msg.innerHTML="此電子郵件已經註冊過";
+                            return;
+                        }
+                        console.log(result["result"]);
+
                         sessionStorage.clear();
 
                         while(

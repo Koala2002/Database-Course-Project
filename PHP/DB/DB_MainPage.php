@@ -3,35 +3,42 @@
 
     /*fetch all goods from database*/
     $SQL="";
-    
     $goodslistData=array();
-    
-    if(isset($_GET["Search"])){
+      
+    $sql_data=SearchStatement_ToSQL(isset($_GET["Search"])?$_GET["Search"]:null,$loginstate);
         
-        $sql_data=SearchStatement_ToSQL($_GET["Search"]);
+    for($id=0;$id<count($sql_data);$id++){
         
-        for($id=0;$id<count($sql_data);$id++){
-            
-            $SQL.= $sql_data[$id];
-            if($id==count($sql_data)-1)continue;
-            $SQL.= " UNION ";
-        }
+        $SQL.= $sql_data[$id];
+        if($id==count($sql_data)-1)continue;
+        $SQL.= " UNION ";
     }
-    else $SQL="SELECT * FROM goods WHERE number>0";
-
     
 
-    $result=mysqli_query($bookstore,$SQL);
+    $result=null;
+    $result=mysqli_query($DB,$SQL);
+
+
+
     while($result&&$row=mysqli_fetch_array($result))array_push($goodslistData,$row);
     /*fetch all goods from database*/
 
-
-    function SearchStatement_ToSQL($SearchStatement) {//查詢轉換
+    function SearchStatement_ToSQL($SearchStatement,$loginstate) {//查詢轉換
         $sql=array();
         
+        $CourseView=$loginstate?"CourseViewForLoginUser":"CourseViewForUnloginUser";
+        $GoodsView=$loginstate?"Goods_SELECT_ViewForLoginUser":"GoodsViewForUnloginUser";
+        $DepartmentView=$loginstate?"DepartmenViewForLoginUser":"DepartmentViewForUnloginUser";
+        $InstructorView=$loginstate?"InstructorViewForLoginUser":"InstructorViewForUnloginUser";
+
+        if(!$SearchStatement){
+            $SQL="(SELECT * FROM {$GoodsView} WHERE number>0)";
+            array_push($sql,$SQL);
+            return $sql;
+        }
+
         $SearchStatement=explode(" ",$SearchStatement);
 
-       
         $all_chinese = "/^[\x{4e00}-\x{9fa5}]+$/u";
         $all_alpha="/^[a-zA-z]+$/";
         $all_digit="/^[0-9]{13}$/";
@@ -40,21 +47,21 @@
             $SQL_Query="(";
             if(preg_match($all_chinese,$str)){//科系、教授名稱
                 $statement1="
-                    (SELECT * FROM goods
-                    WHERE number>0 AND goods.isbn IN (
-                        SELECT course.isbn FROM course
-                        WHERE course.isbn IS NOT NULL AND course.dep_id=(
-                            SELECT department.dep_id FROM department WHERE department.dep_name='$str'
+                    (SELECT * FROM {$GoodsView}
+                    WHERE number>0 AND {$GoodsView}.isbn IN (
+                        SELECT {$CourseView}.isbn FROM {$CourseView}
+                        WHERE {$CourseView}.isbn IS NOT NULL AND {$CourseView}.dep_id=(
+                            SELECT {$DepartmentView}.dep_id FROM {$DepartmentView} WHERE {$DepartmentView}.dep_name='$str'
                         )
                     ))
                 ";
 
                 $statement2="
-                    (SELECT * FROM goods
-                    WHERE number>0 AND goods.isbn IN (
-                        SELECT course.isbn FROM course
-                        WHERE course.isbn IS NOT NULL AND course.ins_id=(
-                            SELECT instructor.ins_id FROM instructor WHERE instructor.ins_name='$str'
+                    (SELECT * FROM {$GoodsView}
+                    WHERE number>0 AND {$GoodsView}.isbn IN (
+                        SELECT {$CourseView}.isbn FROM {$CourseView}
+                        WHERE {$CourseView}.isbn IS NOT NULL AND {$CourseView}.ins_id=(
+                            SELECT {$InstructorView}.ins_id FROM {$InstructorView} WHERE {$InstructorView}.ins_name='$str'
                         )
                     ))
                 ";
@@ -63,11 +70,11 @@
             }
             else if(preg_match($all_alpha,$str)){//教授名稱
                 $statement="
-                    (SELECT * FROM goods
-                    WHERE number>0 AND goods.isbn IN (
-                        SELECT course.isbn FROM course
-                        WHERE course.isbn IS NOT NULL AND course.ins_id=(
-                            SELECT instructor.ins_id FROM instructor WHERE instructor.ins_name='$str'
+                    (SELECT * FROM {$GoodsView}
+                    WHERE number>0 AND {$GoodsView}.isbn IN (
+                        SELECT {$CourseView}.isbn FROM {$CourseView}
+                        WHERE {$CourseView}.isbn IS NOT NULL AND {$CourseView}.ins_id=(
+                            SELECT {$InstructorView}.ins_id FROM {$InstructorView} WHERE {$InstructorView}.ins_name='$str'
                         )
                     ))
                 ";
@@ -76,14 +83,14 @@
             }
             else if(preg_match($all_digit,$str)){//ISBN
                 $statement="
-                    (SELECT * FROM goods WHERE number>0 AND goods.isbn=$str)
+                    (SELECT * FROM {$GoodsView} WHERE number>0 AND {$GoodsView}.isbn=$str)
                 ";
                 
                 $SQL_Query.=$statement;
             }
 
             $statement="
-                (SELECT * FROM goods WHERE number>0 AND goods.goods_name LIKE '%$str%')
+                (SELECT * FROM {$GoodsView} WHERE number>0 AND {$GoodsView}.goods_name LIKE '%$str%')
             ";
             
             if(strlen($SQL_Query)>1)$SQL_Query.=" UNION ".$statement.")";
@@ -94,7 +101,7 @@
         return $sql;
     }
 
-    function SearchPageBuild($db,$goodslistData){
+    function SearchPageBuild($goodslistData){
         $len=count($goodslistData);
         $tabnum=intdiv($len,10)+($len<10?1:($len%10>0));
         $bookImage=array("📔","📕","📗","📘","📙");

@@ -5,7 +5,7 @@
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         $response = [
-            'UserID'=>GetLoginUser($loginsys)[0]
+            'UserID'=>$loginuser
         ];
 
         echo json_encode($response);

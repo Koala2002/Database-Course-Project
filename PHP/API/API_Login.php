@@ -3,7 +3,6 @@
     session_start();
     header('Content-Type: application/json; charset=UTF-8');
     require_once("../DB/DB_Common.php");
-    require_once("../DB/DB_UnLogin.php");
 
     $loginuser_vcode=$_POST["vcode"];
     $loginuser_account=$_POST["account"];

@@ -1,8 +1,8 @@
 <?php
-    function GoodsUpload($bookstore,$loginsys){
+    function GoodsUpload($db,$loginsys){
         if($_GET["GoodsNum"]==0)return;
 
-        $LoginUserInf=GetLoginUser($loginsys);
+        $LoginUserInf=$loginuser;
         
         for($id=0;$id<$_GET["GoodsNum"];$id++){
             $isbn=$_GET["ISBN"][$id];
@@ -10,8 +10,8 @@
             $description=$_GET["BookDescription"][$id];
             $price=$_GET["BookPrice"][$id];
             $num=$_GET["BookNum"][$id];
-
-            $result=mysqli_query($bookstore,"INSERT INTO goods (isbn,goods_name,description,user_id,price,number) VALUES(
+            
+            $result=mysqli_query($db,"INSERT INTO Goods_INSERT_ViewForLoginUser (isbn,goods_name,description,user_id,price,number) VALUES(
                 '$isbn',
                 '$name',
                 '$description',

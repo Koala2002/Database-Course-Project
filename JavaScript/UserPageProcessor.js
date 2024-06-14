@@ -13,9 +13,12 @@ function TabInit(){
     else if(urlhash[0]==="CurOrder")ViewNow=2;
     else if(urlhash[0]==="HistoryOrder")ViewNow=3;
 
-    document.getElementById("goodslist-sub-view-tab-"+0).style.display="flex";
-    document.getElementById("curorder-sub-view-tab-"+0).style.display="flex";
-    document.getElementById("historyorder-sub-view-tab-"+0).style.display="flex";
+    let GoodsListSubViewTab=document.getElementById("goodslist-sub-view-tab-"+0);
+    if(GoodsListSubViewTab)GoodsListSubViewTab.style.display="flex";
+    let CurOrderSubViewTab=document.getElementById("curorder-sub-view-tab-"+0);
+    if(CurOrderSubViewTab)CurOrderSubViewTab.style.display="flex";
+    let HistoryOrderSubViewTab=document.getElementById("historyorder-sub-view-tab-"+0);
+    if(HistoryOrderSubViewTab)HistoryOrderSubViewTab.style.display="flex";
 
     document.getElementById("main-view-tab-"+ViewNow).style.display="flex";
     document.getElementById("tab-btn-bar-"+ViewNow).style.display="flex";
@@ -45,7 +48,7 @@ function TabInit(){
     }
 
     let btn=document.getElementsByClassName("EditBookInf-Btn"); //
-    console.log(urlhash[0]+"-tab-btn-"+urlhash[1]);
+    
     document.getElementById(urlhash[0]+"-tab-btn-"+urlhash[1]).click();
 }
 
@@ -60,7 +63,7 @@ function ViewChange(view){
     }
     else if(view==3){
         window.location.hash="HistoryOrder-0";
-        //document.getElementById("Historyorder-tab-btn-0").click();
+        document.getElementById("HistoryOrder-tab-btn-0").click();
     }
     document.getElementById("main-view-tab-"+ViewNow).style.display="none";
     document.getElementById("tab-btn-bar-"+ViewNow).style.display="none";

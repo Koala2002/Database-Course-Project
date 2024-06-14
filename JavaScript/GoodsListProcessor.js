@@ -1,4 +1,4 @@
-function GoodsSetting(page){
+function GoodsSetting(page,loginstate){
     let goods=document.getElementsByClassName("goods-item-Block");
     let UserID;
 
@@ -10,19 +10,21 @@ function GoodsSetting(page){
     }
     
     $.ajax({
-        url:"../PHP/API/API_GoodsQueryALL.php",
+        url:"../PHP/API/API_GoodsQuery.php",
         data:{
             Page:page,
-            UserID:UserID
+            UserID:UserID,
+            LoginState:loginstate
         },
         type:"POST",
         success:(data)=>{
+            console.log(data);
             for(let id=0;id<goods.length;id++){
                 goods[id].addEventListener("click",()=>{
                     window.location.href="../PHP/BookPage.php?GoodsID="+data["GoodsData"][id]["goods_id"];
                 });
             }
         },
-        error:(error)=>{console.log(error,"In File MainPageProcessor.js GoodsSetting(Query) API fail2");}
+        error:(error)=>{console.log(error,"In File MainPageProcessor.js GoodsSetting(Query) API fail");}
     });
 }

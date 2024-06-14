@@ -9,7 +9,7 @@
     if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $ISBN = $_GET["ISBN"];
 
-        $result=mysqli_query($bookstore,"SELECT * FROM book WHERE isbn='$ISBN'");    
+        $result=mysqli_query($DB,"SELECT * FROM BookViewForLoginUser WHERE isbn='$ISBN'");    
         
         $bookname=null;
         if($result){

@@ -5,12 +5,16 @@
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $id=$_POST["GoodsID"];
 
-        $result=mysqli_query($bookstore,"SELECT * FROM goods WHERE goods_id=$id");    
+        $GoodsView=$loginstate?"Goods_SELECT_ViewForLoginUser":"GoodsViewForUnloginUser";
+
+        $result=mysqli_query($DB,"SELECT * FROM {$GoodsView} WHERE goods_id=$id");    
         
         $GoodsName=null;
         $GoodsPrice=null;
         $GoodsNumber=null;
         $GoodsSeller=null;
+        $GoodsDescription=null;
+        $GoodsISBN=null;
 
         if($result){
             if(mysqli_num_rows($result)){
@@ -19,9 +23,8 @@
                 $GoodsPrice=$result["price"];
                 $GoodsNumber=$result["number"];
                 $GoodsSeller=$result["user_id"];
-            }
-            else{
-                
+                $GoodsDescription=$result["description"];
+                $GoodsISBN=$result["isbn"];
             }
         }
 
@@ -30,6 +33,10 @@
             'GoodsPrice' => $GoodsPrice,
             'GoodsNumber' => $GoodsNumber,
             'GoodsSeller' => $GoodsSeller,
+            'GoodsDescription'=>$GoodsDescription,
+            'GoodsISBN'=>$GoodsISBN,
+            'LoginUserID'=>$loginuser,
+            'LoginState' => $loginstate
         ];
 
         echo json_encode($response);

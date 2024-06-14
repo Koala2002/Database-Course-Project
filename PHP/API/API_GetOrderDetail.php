@@ -4,8 +4,8 @@
     
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
         $ID=$_POST["OrderID"];
-        $result=mysqli_query($bookstore,"
-            SELECT * FROM order_detail WHERE ord_id='$ID'
+        $result=mysqli_query($DB,"
+            SELECT * FROM OrderDetailViewForLoginUser WHERE ord_id='$ID'
         ");
 
         $data=array();

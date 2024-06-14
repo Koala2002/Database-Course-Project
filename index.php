@@ -25,7 +25,7 @@
     <script>CartChecker();</script>
     <div id="header">
         <?php
-            if(CheckLogin($loginsys))echo "<script>UserLoginHeaderBuild('','PHP/');</script>";
+            if($loginstate)echo "<script>UserLoginHeaderBuild('','PHP/');</script>";
             else echo "<script>UserUnLoginHeaderBuild('','PHP/');</script>";
         ?>
 
@@ -40,11 +40,14 @@
 
     <div id="goodsBlock">
         <div class="ViewTabBlock MainPage-ViewTabBlock">
-            <?php SearchPageBuild($bookstore,$goodslistData);?>
+            <?php SearchPageBuild($goodslistData);?>
             <script>
                 tabButtonSetting("tab-btn","MainPage-tab-btn-bar","goodslist-view-tab-","MainPage");
                 tabInit();
-                GoodsSetting("MainPage");
+                <?php
+                    if($loginstate)echo "GoodsSetting('MainPage',1);";
+                    else echo "GoodsSetting('MainPage',0);";
+                ?>
             </script>
         </div>
     </div>

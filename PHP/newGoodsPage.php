@@ -3,7 +3,7 @@
     require_once("DB//DB_Common.php");
     require_once("DB/DB_newGoods.php");
 
-    if($_POST){GoodsUpload($bookstore,$loginsys);}
+    if($_POST){GoodsUpload($DB,$loginsys);}
 ?>
 <!DOCTYPE html>
 <html lang="zh_TW">

@@ -26,13 +26,13 @@
     <script>CartChecker();</script>
     <div id="header">
         <?php
-            if(CheckLogin($loginsys))echo "<script>UserLoginHeaderBuild('../','');</script>";
+            if($loginstate)echo "<script>UserLoginHeaderBuild('../','');</script>";
             else echo "<script>UserUnLoginHeaderBuild('../','');</script>";
         ?>
     </div>
 
     <div id="user_inf">
-        <?php UserInfBuild($bookstore);?>
+        <?php UserInfBuild($DB);?>
         <!--a href="UserProfileEditPage.php" id="profileEditURL">🖊️</a-->
     </div>
 
@@ -43,25 +43,24 @@
     <div id="InformationBlock">
         <div class="ViewTabBlock">
             <div class="ViewTab vtb-goodslist" id="main-view-tab-1">
-                <?php GoodsListView($account,$goodslistData);?>
+                <?php GoodsListView($DB,$account);?>
             </div>
             
             <div class="ViewTab vtb-curorder" id="main-view-tab-2">
-                <?php CurOrderListView($account,$orderData);?>
+                <?php if($loginuser)CurOrderListView($DB,$account);?>
             </div>
 
             
             <div class="ViewTab vtb-historyorder" id="main-view-tab-3">
-                <?php HistoryOrderInf($account,$historyorderData);?>
+                <?php HistoryOrderInf($DB,$account);?>
             </div>
         </div>
     </div>
 
     <script>
-        
         tabButtonSetting("goodslist-btn","tab-btn-bar-1","goodslist-sub-view-tab-","GoodsList");
         tabButtonSetting("curorder-btn","tab-btn-bar-2","curorder-sub-view-tab-","CurOrder");
-        tabButtonSetting("histtryorder-btn","tab-btn-bar-3","historyorder-sub-view-tab-","HistoryOrder");
+        tabButtonSetting("historyorder-btn","tab-btn-bar-3","historyorder-sub-view-tab-","HistoryOrder");
         TabInit();
         GoodsSetting("UserPage");
         OrderDetailLinkSetting();

@@ -23,7 +23,7 @@
 <body>
     <div id="header">
         <?php
-            if(CheckLogin($loginsys))echo "<script>UserLoginHeaderBuild('../','');</script>";
+            if($loginstate)echo "<script>UserLoginHeaderBuild('../','');</script>";
             else echo "<script>UserUnLoginHeaderBuild('../','');</script>";
         ?>
     </div>

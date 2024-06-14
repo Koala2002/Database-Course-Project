@@ -4,7 +4,9 @@ var ddd={};
 function tabButtonSetting(btnClass,btnbarclass,tabID,viewName){
     let btns=document.getElementsByClassName(btnClass);
     let bar=document.getElementById(btnbarclass);
-    
+
+    if(!bar)return;
+
     ddd[viewName]=[];
     ddd[viewName].push(document.createElement("label"));
     ddd[viewName].push(document.createElement("label"));
@@ -89,5 +91,6 @@ function tabButtonSetting(btnClass,btnbarclass,tabID,viewName){
             if(idx==viewNow[viewName])btn.style.backgroundColor="var(--websitethirdColor)";
             else btn.style.backgroundColor="var(--websitebackground-color)";
         });
+        console.log(btn);
     });
 }

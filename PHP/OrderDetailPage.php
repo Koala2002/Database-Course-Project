@@ -61,7 +61,7 @@
         </div>
         <div id="Order-Detail-State-Chat-Block">
             <div id="Order-Detail-State-Block">
-                <?php OrderStateViewBuild($loginsys,$orderData)?>
+                <?php OrderStateViewBuild($loginsys,$orderData,$loginuser)?>
             </div>
             <div id="Order-Detail-Chat-Block">
                 <textarea id="chat-Block" placeholder="請輸入訊息"></textarea>

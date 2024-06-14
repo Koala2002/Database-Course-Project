@@ -1,57 +1,23 @@
 <?php
 
     require_once("DB_Common.php");
- 
-    $LoginUserInf=GetLoginUser($loginsys);
-
-    $account=$LoginUserInf?$LoginUserInf[0]:null;
-    $password=$LoginUserInf?$LoginUserInf[1]:null;
-   
-    /*fetch goods from user database*/
-    $result=mysqli_query($bookstore,"SELECT * FROM goods WHERE user_id='$_GET[UserID]'");
-    $goodslistData=array();
-    
-    while($row=mysqli_fetch_array($result))array_push($goodslistData,$row);
-
-   // print_r($result);
-    /*fetch goods from user database*/
 
 
-    /*fetch order from user database*/ 
-    $result=mysqli_query($bookstore,"
-        SELECT * FROM order_form
-        WHERE (ord_buyer='$account' OR ord_seller='$account') AND (ord_state='0' OR ord_state='1')
-        ORDER BY ord_seller='$account' DESC
-    ");
-
-    $orderData=array();
-    while($row=mysqli_fetch_array($result))array_push($orderData,$row);
-    /*fetch order from user database*/
-
-    /*fetch historyorder from user database*/ 
-    $result=mysqli_query($bookstore,"
-        SELECT * FROM order_form
-        WHERE (ord_buyer='$account' OR ord_seller='$account') AND (ord_state='2' OR ord_state='3' OR ord_state='4')
-        ORDER BY ord_seller='$account' DESC
-    ");
-
-    $historyorderData=array();
-    while($row=mysqli_fetch_array($result))array_push($historyorderData,$row);
-    /*fetch historyorder from user database*/
-
+    $account=$loginuser?$loginuser:null;
 
     function UserInf($db,$account){//VIEW USER INF
-        $data=mysqli_fetch_array(mysqli_query($db,"SELECT * FROM user WHERE user_id='$account'"));
+        $data=mysqli_fetch_array(mysqli_query($db,"SELECT * FROM User_SELECT_ViewForLoginUser WHERE user_id='$account'"));
 
         return $data;
     }
 
     function UserInfBuild($db){
         $data=UserInf($db,$_GET["UserID"]);
+
         echo "
             <label class='labelTitle'>ID</label><label class='labelContent'>$_GET[UserID]</label>
-            <label class='labelTitle'>暱稱</label><label class='labelContent'>$data[user_name]</label>
-            <label class='labelTitle'>EMail</label><label class='labelContent'>$data[user_email]</label>
+            <label class='labelTitle'>暱稱</label><label class='labelContent'>{$data["user_name"]}</label>
+            <label class='labelTitle'>EMail</label><label class='labelContent'>{$data["user_email"]}</label>
         ";
     }
 
@@ -63,7 +29,17 @@
         }
     }
 
-    function GoodsListView($account,$goodslistData){
+    function GoodsListView($db,$account){
+        /*fetch goods from user database*/
+        $result=mysqli_query($db,"SELECT * FROM Goods_SELECT_ViewForLoginUser WHERE user_id='$_GET[UserID]'");
+        $goodslistData=array();
+        print_r($db->error);
+        while($row=mysqli_fetch_array($result))array_push($goodslistData,$row);
+
+        // print_r($result);
+        /*fetch goods from user database*/
+
+
         $len=count($goodslistData);
         $tabnum=intdiv($len,6)+($len<6?1:($len%6>0));
         
@@ -118,7 +94,19 @@
         }
     }
 
-    function CurOrderListView($account,$orderData){
+    function CurOrderListView($db,$account){
+        if($account!=$_GET["UserID"])return;
+        /*fetch order from user database*/
+        $result=mysqli_query($db,"
+            SELECT * FROM OrderForm_SELECT_ARScBc_ViewForLoginUser
+            WHERE ord_seller='$account' OR ord_buyer='$account'
+            ORDER BY ord_seller='$account' DESC
+        ");
+        print_r($db->error);
+        $orderData=array();
+        while($row=mysqli_fetch_array($result))array_push($orderData,$row);
+        /*fetch order from user database*/
+        
         $len=count($orderData);
         $tabnum=intdiv($len,6)+($len<6?1:($len%6>0));
 
@@ -146,31 +134,36 @@
                 ";
                 
                 if($account==$orderData[$item_id]["ord_seller"]){//賣家view
-                   
-                    if($orderData[$item_id]["ord_state"]==0){
+                    if($orderData[$item_id]["ord_state"]=='0'){
                         echo "
                             <button class='Order-List-Btn ord-list-btn-accept' id='ord-accept-btn-$order_ID'>確認</button>
                             <button class='Order-List-Btn ord-list-btn-reject' id='ord-reject-btn-$order_ID'>拒絕</button>
                         ";
                     }
-                    else{
+                    else if($orderData[$item_id]["ord_state"]=='1'||$orderData[$item_id]["ord_state"]=='3'){
                         echo "
                             <button class='Order-List-Btn ord-list-btn-complete' id='ord-complete-btn-$order_ID'>完成</button>
                             <button class='Order-List-Btn ord-list-btn-terminate' id='ord-terminate-btn-$order_ID'>終止</button>
                         ";
                     }
-                    
+                    else if($orderData[$item_id]["ord_state"]=='2'){
+                        echo "正在等待對方按下完成訂單...";
+                    }
                 }
                 else{//買家view
-                    if($orderData[$item_id]["ord_state"]==0){
+                    if($orderData[$item_id]["ord_state"]=='0'){
                         echo "
                             賣家還沒確認您的訂單
                         ";
                     }
-                    else{
+                    else if($orderData[$item_id]["ord_state"]=='1'||$orderData[$item_id]["ord_state"]=='2'){
                         echo "
-                            賣家確認了您的訂單
+                            <button class='Order-List-Btn ord-list-btn-complete' id='ord-complete-btn-$order_ID'>完成</button>
+                            <button class='Order-List-Btn ord-list-btn-terminate' id='ord-terminate-btn-$order_ID'>終止</button>
                         ";
+                    }
+                    else if($orderData[$item_id]["ord_state"]=='3'){
+                        echo "正在等待對方按下完成訂單...";
                     }
                 }
                 echo "</div>";//Order-List-State-Block END
@@ -192,7 +185,19 @@
         }
     }
 
-    function HistoryOrderInf($account,$orderData){
+    function HistoryOrderInf($db,$account){
+        if($account!=$_GET["UserID"])return;
+        /*fetch historyorder from user database*/ 
+        $result=mysqli_query($db,"
+            SELECT * FROM OrderForm_FcUtSt_ViewForLoginUser
+            WHERE (ord_buyer='$account' OR ord_seller='$account') AND (ord_state>='4' AND ord_state<='6')
+            ORDER BY ord_seller='$account' DESC
+        ");
+
+        $orderData=array();
+        while($row=mysqli_fetch_array($result))array_push($orderData,$row);
+        /*fetch historyorder from user database*/
+        
         $len=count($orderData);
         $tabnum=intdiv($len,6)+($len<6?1:($len%6>0));
 
@@ -219,12 +224,12 @@
                     <div class='Order-List-State-Block'>
                 ";
                 
-                if($orderData[$item_id]["ord_state"]==2){
+                if($orderData[$item_id]["ord_state"]==4){
                     echo "
                         這筆交易訂單已經完成
                     ";
                 }
-                if($orderData[$item_id]["ord_state"]==3||$orderData[$item_id]["ord_state"]==4){
+                if($orderData[$item_id]["ord_state"]==5||$orderData[$item_id]["ord_state"]==6){
                     echo "
                         這筆交易訂單已無效
                     ";
@@ -245,7 +250,7 @@
         
         for( $id= 0; $id<$tabnum; $id++ ){
             $vis_id=$id+1;
-            echo "<button class='tab-btn' id='HistoryOrder-tab-btn-$id'>$vis_id</button>";
+            echo "<button class='tab-btn historyorder-btn' id='HistoryOrder-tab-btn-$id'>$vis_id</button>";
         }
     }
 ?>

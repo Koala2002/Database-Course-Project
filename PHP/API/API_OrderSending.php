@@ -6,32 +6,31 @@
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $timenow=date("Y-m-d H:i:s");
-        $BUYER=GetLoginUser($loginsys)['user_id'];
+        $BUYER=$loginuser;
 
         foreach($_POST["GoodsMaxNumber"] as $goodsID => $num){
             $newvalue=$num-$_POST["GoodsTotal"][$goodsID];
             
-            $goodsNumUpdate=mysqli_query($bookstore,"
-                UPDATE goods SET number=$newvalue WHERE goods_id=$goodsID
-            ");
+            mysqli_query($DB,"UPDATE Goods_NAME_UPDATE_ViewForLoginUser SET number=$newvalue WHERE goods_id=$goodsID");
+            mysqli_query($DB,"UPDATE Goods_UPDATE_ViewForLoginUser SET number=$newvalue WHERE goods_id=$goodsID");
         }
 
         foreach($_POST["Cart"] as $seller => $detail ) {
-            $Order=mysqli_query($bookstore,"
-                INSERT INTO order_form 
-                (ord_buyer,ord_seller,ord_ordtime,ord_state) 
-                VALUES('$BUYER','$seller','$timenow','0')
+            mysqli_query($DB,"
+                INSERT INTO OrderForm_INSERT_ViewForLoginUser 
+                (ord_buyer,ord_seller,ord_ordtime) 
+                VALUES('$BUYER','$seller','$timenow')
             ");
 
-            $OrderID=$bookstore->insert_id;
+            $OrderID=$DB->insert_id;
 
             foreach($detail as $index => $detailItem){
                 $GoodsID=$detailItem["GoodsID"];
                 $Number=$detailItem["Number"];
                 $Require=$detailItem["Require"];
      
-                $Detail=mysqli_query($bookstore,"
-                    INSERT INTO order_detail 
+                mysqli_query($DB,"
+                    INSERT INTO OrderDetailViewForLoginUser
                     (ord_id,goods_id,ord_quantity,description) 
                     VALUES($OrderID,$GoodsID,$Number,'$Require')
                 ");
