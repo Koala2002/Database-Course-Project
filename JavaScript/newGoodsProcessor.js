@@ -108,9 +108,7 @@ function NextState(id,oldstate,newstate,value){
 
 function PreState(){history.back();}
 
-function GoodsItemSetting(ISBN,Name,Num,Price){
-    document.getElementById("");
-}
+
 
 var TabNow=0;
 

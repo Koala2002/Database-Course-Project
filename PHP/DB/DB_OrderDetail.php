@@ -39,7 +39,7 @@
         $orderID=$orderData["ord_id"];
         echo "
             <div id='Order-State-UserID-Block'>
-                此訂單的交易對象：$order_userID
+                此訂單的交易對象：<a href='UserPage.php?UserID={$order_userID}'>{$order_userID}</a>
             </div>
         
             <div id='Order-State-Block'>            
@@ -96,8 +96,8 @@
         }
 
 
-        if($orderData["ord_state"]>='5'&&$orderData["ord_state"]<='6'){
-            $end_result=$orderData["ord_state"]=='5'?"正常終止交易":"系統終止交易";
+        if($orderData["ord_state"]>='5'&&$orderData["ord_state"]<='7'){
+            $end_result=$orderData["ord_state"]=='5'?"被賣家拒絕的訂單":($orderData["ord_state"]=='6'?"正常終止交易":"系統終止交易");
                     
             echo "
                 此訂單為無效訂單

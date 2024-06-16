@@ -13,11 +13,9 @@
         if($id==count($sql_data)-1)continue;
         $SQL.= " UNION ";
     }
-    
 
     $result=null;
     $result=mysqli_query($DB,$SQL);
-
 
 
     while($result&&$row=mysqli_fetch_array($result))array_push($goodslistData,$row);
@@ -28,7 +26,7 @@
         
         $CourseView=$loginstate?"CourseViewForLoginUser":"CourseViewForUnloginUser";
         $GoodsView=$loginstate?"Goods_SELECT_ViewForLoginUser":"GoodsViewForUnloginUser";
-        $DepartmentView=$loginstate?"DepartmenViewForLoginUser":"DepartmentViewForUnloginUser";
+        $DepartmentView=$loginstate?"DepartmentViewForLoginUser":"DepartmentViewForUnloginUser";
         $InstructorView=$loginstate?"InstructorViewForLoginUser":"InstructorViewForUnloginUser";
 
         if(!$SearchStatement){

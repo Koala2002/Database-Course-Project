@@ -87,14 +87,12 @@ function CartListBuild(){
 
                 
                 if(goodsTotalNumber[cart[id]["GoodsID"]]>goodsMaxNumber[cart[id]["GoodsID"]]){
-                    itemID.setAttribute('style',"background-color:red;");
-                    itemName.setAttribute('style',"background-color:red;");
-                    itemRequire.setAttribute('style',"background-color:red;");
-                    itemPrice.setAttribute('style',"background-color:red;");
-                    itemNumber.setAttribute('style',"background-color:red;");
-                    itemTotalPrice.setAttribute('style',"background-color:red;");
-               
-                    
+                    itemID.setAttribute('style',"background-color:var(--CartItemWarningBackgroundColor);");
+                    itemName.setAttribute('style',"background-color:var(--CartItemWarningBackgroundColor);");
+                    itemRequire.setAttribute('style',"background-color:var(--CartItemWarningBackgroundColor);");
+                    itemPrice.setAttribute('style',"background-color:var(--CartItemWarningBackgroundColor);");
+                    itemNumber.setAttribute('style',"background-color:var(--CartItemWarningBackgroundColor);");
+                    itemTotalPrice.setAttribute('style',"background-color:var(--CartItemWarningBackgroundColor);");
                 }
 
 
@@ -135,6 +133,9 @@ function OrderSend(){
         },
         success: (data)=>{
             console.log(data);
+            Array.from(data["IdData"]).forEach((ID)=>{
+                MsgSend(5,ID);
+            });
 
             sessionStorage.removeItem("Cart");
     

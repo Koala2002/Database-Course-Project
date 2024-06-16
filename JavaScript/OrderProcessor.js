@@ -10,6 +10,7 @@ function OrderCheckButtonSetting(){
 
         btn.addEventListener("click",()=>{
             if(confirm("您確定要接受這筆訂單嗎？")){
+                MsgSend(6,id);
                 $.ajax({
                     url:"../PHP/API/API_OrderCheck.php",
                     type:"POST",
@@ -31,6 +32,7 @@ function OrderCheckButtonSetting(){
 
         btn.addEventListener("click",()=>{
             if(confirm("您確定要拒絕這筆訂單嗎？")){
+                MsgSend(1,id);
                 $.ajax({
                     url:"../PHP/API/API_OrderCheck.php",
                     type:"POST",
@@ -38,11 +40,12 @@ function OrderCheckButtonSetting(){
                         OrderID:id,
                         state:"reject"
                     },
-                    success:(data)=>{
+                    success:(result)=>{
+                        console.log(result);
                         if(window.location.href.match("OrderDetailPage.php")){
-                            window.location.href=document.referrer+"#CurOrderView";
+                            //window.location.href=document.referrer+"#CurOrderView";
                         }
-                        else window.location.reload();
+                        //else window.location.reload();
                     },
                     error:(error)=>{
                         console.log(error,"In File OrderProcessor.js OrderCheckButtonSetting() API fail");
@@ -55,7 +58,7 @@ function OrderCheckButtonSetting(){
     Array.from(completeBtn).forEach((btn)=>{
         let id=btn.id.substring(btn.id.lastIndexOf("ord-complete-btn-")+17,btn.id.length);
 
-        console.log(id);
+
 
         btn.addEventListener("click",()=>{
             if(confirm("已經完成這筆訂單交易了嗎？")){
@@ -66,7 +69,10 @@ function OrderCheckButtonSetting(){
                         OrderID:id,
                         state:"complete"
                     },
-                    success:(data)=>{window.location.reload();},
+                    success:(result)=>{
+                        if(result["result"]="fullcomplete")MsgSend(3,id);
+                        window.location.reload();
+                    },
                     error:(error)=>{
                         console.log(error,"In File OrderProcessor.js OrderCheckButtonSetting() API fail");
                     }
@@ -80,6 +86,7 @@ function OrderCheckButtonSetting(){
 
         btn.addEventListener("click",()=>{
             if(confirm("您確定要終止這筆訂單嗎？")){
+                MsgSend(2,id);
                 $.ajax({
                     url:"../PHP/API/API_OrderCheck.php",
                     type:"POST",

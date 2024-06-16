@@ -6,7 +6,7 @@
     }
 
     #newGoodsList{
-        width:calc(80vw - 50px);
+        width:calc(62.5vw + 150px);
     }
 }
 
@@ -16,15 +16,15 @@
     }
     
     #newGoodsList{
-        width: calc(50vw - 50px);
+        width:calc(37.5vw + 150px);
     }
 }
 
 #GoodsInfInputBlock{
     position: absolute;
-    
-    top:calc(50px + 4vh);
-    left:10vw;
+    top:11vh ;
+
+    left:var(--BlockOffset);
 
     display: flex;
     flex-wrap: wrap;
@@ -34,12 +34,14 @@
 
     font-size: 1em;
 
-    width: 300px;
-    height:calc(92vh - 100px);
+    width: 25vw;
+    height:80vh;
 
     padding:25px;
     
     border-radius: 25px;
+
+    box-sizing: border-box;
 
     background-color: var(--websitesecondColor);
     
@@ -49,8 +51,8 @@
 }
 
 #GoodsInfInputBlock input{
-    width: 295px;
-    height: 40px;
+    width: calc(max(7.5vw,6vh)*2 + 25px);
+    height:6vh;
 
     margin-bottom: 30px;
 
@@ -80,13 +82,14 @@
     flex-wrap: wrap;
     justify-content: space-between;
 
-    width:250px;
+    width: calc(max(7.5vw,6vh)*2 + 25px);
     height:40px;
 }
 
 #GoodsInfInputBlock button{
-    width:100px;
-    height:40px;
+    width: max(7.5vw,6vh);
+    height: 6vh;
+
 
     border-radius: 30px;
     border:none;
@@ -108,8 +111,8 @@
 
 
 #GoodsInfInputBlock textarea{
-    width: 295px;
-    height: 180px;
+    width: calc(max(7.5vw,6vh)*2 + 25px);
+    height:20vh;
 
     margin-bottom: 30px;
 
@@ -134,11 +137,12 @@
 #newGoodsList{
     position: absolute;
     
-    top:calc(50px + 4vh);
-    right:10vw;    
+    top:11vh ;
+    right:var(--BlockOffset);
 
-    height:calc(92vh - 100px);
+    height:80vh;
 
+    box-sizing: border-box;
     padding:25px;
 
     border-radius: 25px;
@@ -187,8 +191,9 @@
     align-items: center;
     justify-content: center;
     
-    width:100px;
-    height:40px;
+    width: max(7.5vw,6vh);
+    height: 6vh;
+
 
     border-radius: 30px;
     border:none;
@@ -206,4 +211,5 @@
         background-color:  var(--linkBackground-hover-color);
         cursor: pointer;
     }
+
 }

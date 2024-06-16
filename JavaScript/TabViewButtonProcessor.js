@@ -1,7 +1,10 @@
 var viewNow={};
 var ddd={};
+var btnClass,btnbarclass,tabID,viewName;
 
 function tabButtonSetting(btnClass,btnbarclass,tabID,viewName){
+
+    
     let btns=document.getElementsByClassName(btnClass);
     let bar=document.getElementById(btnbarclass);
 
@@ -30,9 +33,8 @@ function tabButtonSetting(btnClass,btnbarclass,tabID,viewName){
         btn.addEventListener("click",()=>{
             btns[viewNow[viewName]].style.backgroundColor="var(--websitebackground-color)";
             document.getElementById(tabID+viewNow[viewName]).style.display="none";
-            
             let preid=viewNow[viewName];
-            
+
             btns[viewNow[viewName]].style.backgroundColor="var(--websitebackground-color)";
             
             viewNow[viewName]=idx;
@@ -55,9 +57,6 @@ function tabButtonSetting(btnClass,btnbarclass,tabID,viewName){
                 if(preid+i<btns.length)btns[preid+i].style.display="none";
             }
             
-            btns[0].style.marginRight="15px";
-            if(preid+2<btns.length)btns[preid+2].style.marginRight="15px";
-            if(preid+3<btns.length)btns[preid+3].style.marginRight="15px";
 
             btns[viewNow[viewName]].style.display="flex";
             for(let i=1;i<=2;i++){
@@ -73,12 +72,9 @@ function tabButtonSetting(btnClass,btnbarclass,tabID,viewName){
 
             if(viewNow[viewName]-2>0){
                 ddd[viewName][0].style.display="flex";
-                btns[0].style.marginRight="0";
             }
             if(viewNow[viewName]+2<btns.length-1){
                 ddd[viewName][1].style.display="flex";
-                if(viewNow[viewName]>0)btns[viewNow[viewName]+2].style.marginRight="0";
-                else btns[viewNow[viewName]+3].style.marginRight="0";
             }
         });
 
@@ -91,6 +87,5 @@ function tabButtonSetting(btnClass,btnbarclass,tabID,viewName){
             if(idx==viewNow[viewName])btn.style.backgroundColor="var(--websitethirdColor)";
             else btn.style.backgroundColor="var(--websitebackground-color)";
         });
-        console.log(btn);
     });
 }

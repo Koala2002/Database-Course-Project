@@ -7,17 +7,18 @@
 @media(min-width:825px){
     #header{justify-content: right;}
 
-    #header a,#header button{margin-left: 25px;}
+    #header #HomeLink,
+    #header #newGoodsLink,
+    #header #UserPageLink,
+    #header #LogoutLink,
+    #header button{margin-left: 25px;}
     
     #HomeLink{
         position:absolute;
         left:calc(50vw - 75px);
     }
     
-    #newGoodsLink{
-        position:absolute;
-        left:calc(50vw + 50px);
-    }
+ 
 }
 
 #header{
@@ -28,7 +29,7 @@
     top:0;
     left: 0;
     width: 100vw;
-    height:50px;
+    height:8vh;
 
     padding-right: 25px;
     padding-left: 25px;
@@ -51,14 +52,19 @@
     left:0;
 
     width: 100vw;
-    height:50px;
+    height:8vh;
     background-color: var(--websitesecondColor);
     box-shadow: var(--contentBlock-shadow);
 
     z-index: 10;
 }
 
-#header a,#header button{
+#header #HomeLink,
+#header #newGoodsLink,
+#header #UserPageLink,
+#header #LoginLink,
+#header #LogoutLink,
+#header button{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -85,12 +91,13 @@
 
 #header #System-Title{
     position: absolute;
-    left: 0;
+    left: 25px;
 
-    font-size: 1.5em;
+    font-size: 2em;
     
-    line-height: 1.5em;
+    line-height: 2em;
 
+    text-decoration: none;
     background-color: transparent;
     box-shadow: none;
 
@@ -100,15 +107,15 @@
 }
 
 #HomeLink,#UserPageLink,#LoginLink,#LogoutLink{
-    width: 100px;
-    height: 35px;
+    width: max(7.5vw,6vh);
+    height: 6vh;
 
     z-index: 20;
 }
 
 #newGoodsLink,#MailBoxBtn{
-    width: 35px;
-    height: 35px;
+    width: 6vh;
+    height: 6vh;
 
     border:none;
     z-index: 20;
@@ -117,15 +124,14 @@
 
 #MailBox{
     position: absolute;
-    top:50px;
-    right:262.5px;
+    right:10vw;
 
-    display:flex;
-
-    height: 0;
-    width:375px;
-    padding-left:10px;
-    padding-right:10px;
+    top:-60vh;
+    height: 60vh;
+    width:25vw;
+    padding-bottom:25px;
+    padding-left:25px;
+    padding-right:25px;
 
     box-sizing: border-box;
 
@@ -133,16 +139,78 @@
 
     background-color: var(--websitesecondColor);
     box-shadow: var(--MailBoxShadow);
-    transition: height 0.25s,padding 0.25s;
+    transition: top 0.25s;
 
     z-index: 5;
+
+    
+}
+
+#mailContentShadow{
+    position: absolute;
+    
+    left: 25px;
+
+    height: calc(60vh - 25px);
+    width:calc(25vw - 50px);
+    box-shadow: var(--MailBoxContentShadow);
+    border-radius: 0 0 15px 15px;
+
+    background-color: var(--websitebackground-color);
+    
 }
 
 #mailContentContainer{
-    width:375px;
-    background-color: var(--websitebackground-color);
+    position: absolute;
+    top:0px;
+    left: 25px;
+
+    display:flex;
+
+    align-items: center;
+    flex-direction: column;
+    height: calc(60vh - 25px);
+    width:calc(25vw - 50px);
     
-    box-shadow: var(--MailBoxContentShadow);
+    padding-bottom: 10px;
 
     border-radius: 0 0 15px 15px;
+
+    overflow-y: auto;
+
+    box-sizing: border-box;
+    z-index: 6;
+}
+
+#mailContentContainer::-webkit-scrollbar{
+    width: 0;
+}
+
+
+.Mail-Row-Container{
+    width:calc(25vw - 100px);
+    background-color: var(--websitesecondColor); 
+
+    padding: 10px;
+    margin-top: 10px;
+
+    border-radius: 5px;
+
+    box-sizing: border-box;
+
+    &:hover{
+        background-color: var(--contentBlock-hover-background-color);
+    }
+}
+
+.Mail-Row-Container .mail-link{
+    font-size: 1em;
+    color:var(--textlink-color);
+   
+    text-decoration: none;
+
+    &:hover{
+        text-decoration:underline;
+        cursor:pointer;
+    }
 }

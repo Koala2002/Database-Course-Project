@@ -18,7 +18,7 @@
     <script type="text/javascript" src="../JavaScript/OrderDetailPageProcessor.js"></script>
     <script type="text/javascript" src="../JavaScript/OrderProcessor.js"></script>
     <script type="text/javascript" src="../JavaScript/HeaderBuilder.js"></script>
-    
+    <script type="text/javascript" src="../JavaScript/MsgProcessor.js"></script>
 
     <title>School Book Store</title>
 </head>
@@ -64,7 +64,10 @@
                 <?php OrderStateViewBuild($loginsys,$orderData,$loginuser)?>
             </div>
             <div id="Order-Detail-Chat-Block">
-                <textarea id="chat-Block" placeholder="請輸入訊息"></textarea>
+                <div id="chat-Block">
+                    
+                </div>
+                <textarea id="chat-input-Block" placeholder="請輸入訊息"></textarea>
             </div>
         </div>
     </div>

@@ -13,7 +13,7 @@
         else if($_POST["state"]=="reject"){
             //如果不刪除那保存這些資料可以幹嘛?->
             
-            $detailresult=mysqli_query($bookstore,"
+            $detailresult=mysqli_query($DB,"
                 SELECT * FROM OrderDetailViewForLoginUser WHERE ord_id='$_POST[OrderID]'
             ");
 
@@ -33,7 +33,7 @@
             }
 
             mysqli_query($DB,"
-                DELETE FROM OrderForm_Delete_ViewForLoginUser WHERE ord_id='$_POST[OrderID]'
+                UPDATE OrderForm_UPDATE_ARScBc_ViewForLoginUser SET ord_state='5' WHERE ord_id='$_POST[OrderID]'
             ");
         }
         else if($_POST["state"]=="complete"){
@@ -50,6 +50,10 @@
                     SET ord_state='4',ord_endtime='$timenow'
                     WHERE ord_id='$_POST[OrderID]' AND (ord_state='2' OR ord_state='3')
                 ");
+
+                echo json_encode(["result"=>"fullcomplete"]);
+
+                return;
             }
             else if($result["ord_seller"]==$loginsys){//如果是賣家第一次按下
                 mysqli_query($DB,"

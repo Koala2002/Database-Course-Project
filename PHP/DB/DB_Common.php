@@ -15,11 +15,11 @@
     function CheckLogin($db){//確認目前裝置有沒有登入者
         $ipaddress=$_SERVER['REMOTE_ADDR'];
         
-        $find_user="SELECT status FROM login_inf WHERE last_ip='$ipaddress'";
+        $find_user="SELECT status FROM login_inf WHERE last_ip='$ipaddress' AND status='1'";
         
         $result=mysqli_query($db,$find_user);
 
-        if($result&&mysqli_num_rows($result))return mysqli_fetch_array($result)["status"]='1';
+        if($result&&mysqli_num_rows($result)==1)return true;
 
         return false;
     }
@@ -31,7 +31,7 @@
         
         $result=mysqli_query($db,$find_user);
 
-        if($result)return mysqli_fetch_array($result)["user_id"];
+        if($result&&mysqli_num_rows($result))return mysqli_fetch_array($result)["user_id"];
 
         return null;
     }
@@ -48,13 +48,10 @@
         }
     }
     
-    function UserLogout($db){//使用者帳號登出
+    function UserLogout($db,$loginuser){//使用者帳號登出
         $ipaddress=$_SERVER['REMOTE_ADDR'];//使用者登入ip
 
-        $query_user="SELECT user_id FROM login_inf WHERE last_ip='$ipaddress'";
-        $user_id=mysqli_fetch_row(mysqli_query($db,$query_user))[0];
-
-        $inf_upd="UPDATE login_inf SET last_ip='$ipaddress',status='0' WHERE user_id='$user_id'";
+        $inf_upd="UPDATE login_inf SET last_ip='$ipaddress',status='0' WHERE user_id='{$loginuser}'";
         
         mysqli_query($db,$inf_upd);
         

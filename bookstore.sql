@@ -74,9 +74,8 @@ DROP TABLE IF EXISTS `bookviewforloginuser`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 /*!50001 CREATE VIEW `bookviewforloginuser` AS SELECT
- 1 AS `ins_id`,
-  1 AS `ins_name`,
-  1 AS `dep_id` */;
+ 1 AS `isbn`,
+  1 AS `book_name` */;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -752,6 +751,28 @@ CREATE TABLE `order_detail` (
 
 LOCK TABLES `order_detail` WRITE;
 /*!40000 ALTER TABLE `order_detail` DISABLE KEYS */;
+INSERT INTO `order_detail` VALUES
+(1,1,1,'訂購1本Python程式設計：從入門到進階應用'),
+(2,2,1,'訂購1本Python程式設計：從入門到進階應用'),
+(3,3,1,'訂購1本Java 7 教學手冊'),
+(4,4,1,'訂購1本C/C++ 無痛學習教本'),
+(5,8,1,'訂購1本ISE Engineering Circuit Analysis'),
+(6,10,2,'訂購2本中級會計學：理論與應用'),
+(7,5,1,'訂購1本商用微積分'),
+(8,13,3,'訂購3本Electronic Devices and Circuit Theory'),
+(9,12,1,'訂購1本Fundamentals of Data Structures in C++'),
+(10,9,1,'訂購1本ISE Engineering Circuit Analysis'),
+(11,6,1,'訂購1本商用微積分'),
+(12,11,2,'訂購2本貨幣銀行學原理'),
+(13,15,1,'訂購1本電腦軟體應用'),
+(14,7,2,'訂購2本ISE Engineering Circuit Analysis'),
+(15,14,2,'訂購2本Signal Integrity'),
+(16,16,2,'訂購2本計算機結構'),
+(17,8,1,'訂購1本ISE Engineering Circuit Analysis'),
+(18,4,1,'訂購1本C/C++ 無痛學習教本'),
+(19,2,2,'訂購2本Python程式設計：從入門到進階應用'),
+(20,7,1,'訂購1本ISE Engineering Circuit Analysis'),
+(21,7,1,'訂購1本ISE Engineering Circuit Analysis');
 /*!40000 ALTER TABLE `order_detail` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -783,6 +804,28 @@ CREATE TABLE `order_form` (
 
 LOCK TABLES `order_form` WRITE;
 /*!40000 ALTER TABLE `order_form` DISABLE KEYS */;
+INSERT INTO `order_form` VALUES
+(1,'AaBb@2','AaBb@1','2024-06-02 10:24:13','2024-06-02 10:48:34','3'),
+(2,'AaBb@1','AaBb@2','2024-06-02 10:28:41','2024-06-03 18:24:17','3'),
+(3,'AaBb@10','AaBb@3','2024-06-02 12:40:29',NULL,'4'),
+(4,'AaBb@10','AaBb@4','2024-06-02 16:06:41',NULL,'4'),
+(5,'AaBb@5','AaBb@8','2024-06-02 20:33:15','2024-06-02 22:33:15','3'),
+(6,'AaBb@11','AaBb@10','2024-06-02 20:35:11',NULL,'4'),
+(7,'AaBb@3','AaBb@5','2024-06-02 11:27:09',NULL,'4'),
+(8,'AaBb@16','AaBb@13','2024-06-02 11:33:29',NULL,'1'),
+(9,'AaBb@1','AaBb@12','2024-06-02 11:47:48',NULL,'1'),
+(10,'AaBb@4','AaBb@9','2024-06-03 02:10:15','2024-06-06 00:00:00','2'),
+(11,'AaBb@8','AaBb@6','2024-06-03 05:49:13',NULL,'1'),
+(12,'AaBb@7','AaBb@11','2024-06-03 05:50:20',NULL,'1'),
+(13,'AaBb@16','AaBb@15','2024-06-03 05:59:43','2024-06-03 09:53:07','3'),
+(14,'AaBb@6','AaBb@7','2024-06-03 12:10:59','2024-06-03 16:20:30','3'),
+(15,'AaBb@12','AaBb@14','2024-06-03 13:16:48','2024-06-03 14:20:41','3'),
+(16,'AaBb@15','AaBb@16','2024-06-03 18:00:26','2024-06-03 21:36:10','3'),
+(17,'AaBb@16','AaBb@8','2024-06-03 18:34:37',NULL,'1'),
+(18,'AaBb@7','AaBb@4','2024-06-03 22:16:26','2024-06-06 00:00:00','2'),
+(19,'AaBb@3','AaBb@2','2024-06-03 22:43:19',NULL,'4'),
+(20,'AaBb@16','AaBb@7','2024-06-04 16:41:08','2024-06-05 17:30:19','3'),
+(21,'AaBb@2','AaBb@7','2024-06-04 17:01:29','2024-06-06 08:30:19','1');
 /*!40000 ALTER TABLE `order_form` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -915,6 +958,32 @@ CREATE TABLE `ordermessage` (
 
 LOCK TABLES `ordermessage` WRITE;
 /*!40000 ALTER TABLE `ordermessage` DISABLE KEYS */;
+INSERT INTO `ordermessage` VALUES
+(1,1),
+(2,1),
+(9,6),
+(15,11),
+(16,12),
+(17,15),
+(18,17),
+(19,20),
+(20,14),
+(21,15),
+(22,15),
+(23,16),
+(24,16),
+(25,5),
+(26,4),
+(4,15),
+(7,17),
+(8,20),
+(11,14),
+(12,15),
+(13,15),
+(33,16),
+(34,16),
+(35,5),
+(36,4);
 /*!40000 ALTER TABLE `ordermessage` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1135,7 +1204,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `bookviewforloginuser` AS select `instructor`.`ins_id` AS `ins_id`,`instructor`.`ins_name` AS `ins_name`,`instructor`.`dep_id` AS `dep_id` from `instructor` */;
+/*!50001 VIEW `bookviewforloginuser` AS select `book`.`isbn` AS `isbn`,`book`.`book_name` AS `book_name` from `book` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -1797,4 +1866,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-14 23:51:11
+-- Dump completed on 2024-06-17  2:29:08

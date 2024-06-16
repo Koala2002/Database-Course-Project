@@ -10,6 +10,10 @@
     src: url('../Font/Nunito-VariableFont_wght.ttf') format('truetype');
 }
 
+html{
+    font-size: 18px;
+}
+
 body{
     font-family: 'Nunito','JF';
     background-color: var(--websitebackground-color);
@@ -47,8 +51,8 @@ button,input[type=submit]{
 ::-webkit-scrollbar-button {height: 0;}
 
 #Cart-Link{
-    width: 50px;
-    height:50px;
+    width: 10vh;
+    height:10vh;
 
     display: flex;
     flex-wrap: wrap;
@@ -57,14 +61,14 @@ button,input[type=submit]{
 
     position:absolute;
 
-    bottom:calc(5vw - 25px);
-    right:calc(5vw - 25px);
+    bottom:9vh;
+    right:calc(var(--BlockOffset) / 2 - 5vh);
 
-    background-color: var(--linkBackground-color);
+    background-color: var(--CartIconBackgroundColor);
 
     border-radius: 100px;
 
-    font-size: 1em;
+    font-size: 2em;
 
     color:var(--linkText-color);
     text-decoration:none;
@@ -74,7 +78,7 @@ button,input[type=submit]{
     box-shadow: var(--linkshadow);
 
     &:hover{
-        background-color:  var(--linkBackground-hover-color);
+        background-color:  var(--CartIconHoverColor);
         cursor:pointer;
     }
 }

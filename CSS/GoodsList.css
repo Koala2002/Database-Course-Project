@@ -1,14 +1,10 @@
 @import url(Theme.css);
 
 .ViewTabBlock{
-    position: absolute;
-    top: 0;
-    left: 0;
+    
 
-    width: calc(50vw - 50px);
-    height:calc(92vh - 100px);
-
-    padding:25px;  
+    width:calc(37.5vw + 100px);
+    height:calc(80vh * 0.9 - 50px);
 }
 
 .ViewTab{
@@ -21,29 +17,34 @@
     position: absolute;
 
 
-    width: calc(50vw - 100px);
-    height:calc(92vh - 215px);
+    width:calc(37.5vw + 100px);
+    height:calc(80vh * 0.9 - 100px);
 
     background-color: var(--websitebackground-color);
 
     border-radius: 15px;
 
     padding: 25px;
-
+    box-sizing: border-box;
     box-shadow: var(--contentBlock-inset-shadow);
 }
 
 .ViewTab .ViewTab{
-
     align-items: left;
+    justify-content: space-between;
     
     flex-direction: column;
-
-    width: calc(50vw - 100px);
-    height:calc(92vh - 215px);
+    background-color:transparent;
+    width:calc(37.5vw + 50px);
+    height:calc(80vh * 0.9 - 150px);
 
     padding: 0;
+    box-sizing: border-box;
     box-shadow:none;
+}
+
+.ViewTab .order-view{
+    justify-content: left; 
 }
 
 .order-view{
@@ -51,24 +52,23 @@
 }
 
 .tab-btn-bar{
+    position: absolute;
+    bottom: 25px;
+
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     
-    position: absolute;
-    bottom:0;
 
-    width: calc(50vw - 100px);
-    height:40px;
+    width:calc(37.5vw + 50px);
+    height:5vh;
     
    
     border-radius: 30px;
 
     padding-left: 25px;
     padding-right: 25px;
-
-    margin-bottom: 25px;
 }
 
 .tab-btn{
@@ -77,13 +77,14 @@
     align-items: center;
     justify-content: center;
     
-    width:40px;
-    height:40px;
+    width:5vh;
+    height:5vh;
 
     border-radius: 30px;
     border:none;
 
-    margin-right: 15px;
+    margin-left: 7.5px;
+    margin-right: 7.5px;
 
     color:var(--linkText-color);
 
@@ -101,8 +102,8 @@
     align-items: center;
     justify-content: center;
     
-    width:40px;
-    height:40px;
+    width:calc(5vh - 15px);
+    height:5vh;
 
     border-radius: 30px;
     border:none;
@@ -115,17 +116,15 @@
 
 .ViewTab-Row{
     display: flex;
-    align-items: center;
+    align-items: left;
     justify-content: left;
 
 
-    width: calc(50vw - 100px);
-    height:calc((92vh - 270px) / 2);
+    width:calc(37.5vw + 50px);
+    height:calc((80vh * 0.9 - 175px) / 2);
 
     border-radius: 7.5px;
-
 }
-
 
 .goods-item-Block{
     display: flex;
@@ -134,8 +133,10 @@
 
     flex-direction: column;
 
-    width:calc((50vw - 100px) / 3 - 50px / 3 - 20px);
-    height:calc((92vh - 270px) / 2 - 20px);
+    width: 12.5vw;
+    height:calc((80vh * 0.9 - 175px) / 2);
+
+    box-sizing: border-box;
 
     border-radius:7.5px;
 
@@ -202,7 +203,7 @@
     align-items: left;
     justify-content: space-between;
 
-    width:calc((50vw - 210px) / 3);
+    
 }
 
 .Book-Price-Block,.Book-Number-Block{
@@ -253,9 +254,6 @@
 
 
 /*newgoods theme*/
-#NewGoods-tab-btn-bar{
-    width: calc(50vw - 250px);
-}
 
 .NewGoods-Book-Name-Block{height: calc(2.5em - 1px);}
 .NewGoods-Book-ISBN-Block{height: calc(1.25em - 1px);}
@@ -276,23 +274,22 @@
 
 /*MainPage theme*/
 .MainPage-ViewTabBlock{
-    width: calc(80vw - 100px);
-    height:calc(92vh - 125px);
+    width:calc(62.5vw + 150px);
+    height:calc(80vh * 0.9 - 50px);
 }
 
 .MainPage-ViewTab{
-    width: calc(80vw - 100px);
-    height:calc(92vh - 240px);
+    width:calc(62.5vw + 150px);
+    height:calc(80vh * 0.9 - 100px);
 }
 
 .MainPage-ViewTab-Row{
-    width: calc(80vw - 100px);
+    width:calc(62.5vw + 100px);
+    height:calc((80vh * 0.9 - 175px) / 2);
 }
 
 #MainPage-tab-btn-bar{
-    width: calc(80vw - 100px);
-    margin-left: 25px;
-
+    width:calc(62.5vw + 100px);
 }
 /*MainPage theme*/
 

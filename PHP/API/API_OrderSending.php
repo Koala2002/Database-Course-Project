@@ -15,6 +15,8 @@
             mysqli_query($DB,"UPDATE Goods_UPDATE_ViewForLoginUser SET number=$newvalue WHERE goods_id=$goodsID");
         }
 
+        $NewOrdID=array();
+
         foreach($_POST["Cart"] as $seller => $detail ) {
             mysqli_query($DB,"
                 INSERT INTO OrderForm_INSERT_ViewForLoginUser 
@@ -23,6 +25,7 @@
             ");
 
             $OrderID=$DB->insert_id;
+            array_push($NewOrdID,$OrderID);
 
             foreach($detail as $index => $detailItem){
                 $GoodsID=$detailItem["GoodsID"];
@@ -39,7 +42,7 @@
         }
         
         $response = [
-            'result'=>"successful"
+            'IdData'=>$NewOrdID
         ];
 
         echo json_encode($response);

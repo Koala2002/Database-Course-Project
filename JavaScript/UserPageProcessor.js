@@ -43,14 +43,45 @@ function TabInit(){
         }
         document.getElementById("main-view-tab-"+id).style.display="none";
         document.getElementById("tab-btn-bar-"+id).style.display="none";
-
-        
     }
-
-    let btn=document.getElementsByClassName("EditBookInf-Btn"); //
     
     document.getElementById(urlhash[0]+"-tab-btn-"+urlhash[1]).click();
 }
+
+window.addEventListener("hashchange",(event)=>{
+    let urlhash=window.location.hash;
+    urlhash=urlhash.slice(1).split('-');
+    
+    let tabid=urlhash.length==2?urlhash[1]:0;
+
+    if(window.location.hash===""||urlhash[0]==="GoodsList"){
+        ViewNow=1;
+        window.location.hash="GoodsList-"+tabid;
+        urlhash= window.location.hash.slice(1).split('-');
+    }
+    else if(urlhash[0]==="CurOrder")ViewNow=2;
+    else if(urlhash[0]==="HistoryOrder")ViewNow=3;
+
+    document.getElementById("main-view-tab-"+ViewNow).style.display="flex";
+    document.getElementById("tab-btn-bar-"+ViewNow).style.display="flex";
+
+    for(let id=1;id<=3;id++){
+        let viewbtn=document.getElementById("ViewChange-Btn-"+id);
+
+        if(!viewbtn)continue;
+
+        if(id==ViewNow){
+            document.getElementById("ViewChange-Btn-"+id).style.backgroundColor="var(--websitethirdColor)";
+            continue;
+        }
+        else viewbtn.style.backgroundColor="var(--websitebackground-color)";
+        
+        document.getElementById("main-view-tab-"+id).style.display="none";
+        document.getElementById("tab-btn-bar-"+id).style.display="none";
+    }
+
+    document.getElementById(urlhash[0]+"-tab-btn-"+urlhash[1]).click();
+});
 
 function ViewChange(view){
     if(view==1){
@@ -68,7 +99,6 @@ function ViewChange(view){
     document.getElementById("main-view-tab-"+ViewNow).style.display="none";
     document.getElementById("tab-btn-bar-"+ViewNow).style.display="none";
 
-    console.log("ViewChange-Btn-"+ViewNow);
     let previewbtn=document.getElementById("ViewChange-Btn-"+ViewNow);
     previewbtn.style.backgroundColor="var(--websitebackground-color)";
 
@@ -77,18 +107,30 @@ function ViewChange(view){
     let viewbtn=document.getElementById("ViewChange-Btn-"+ViewNow);
     viewbtn.style.backgroundColor="var(--websitethirdColor)";
     
-
-    let GoodsListSubViewTab=document.getElementById("goodslist-sub-view-tab-"+subview[0]);
-    if(GoodsListSubViewTab)GoodsListSubViewTab.style.display="none";
-    let CurOrderSubViewTab=document.getElementById("curorder-sub-view-tab-"+subview[1]);
-    if(CurOrderSubViewTab)CurOrderSubViewTab.style.display="none";
-    let HistoryOrderSubViewTab=document.getElementById("historyorder-sub-view-tab-"+subview[2]);
-    if(HistoryOrderSubViewTab)HistoryOrderSubViewTab.style.display="none";
-
-    subview[0]=subview[1]=subview[2]=0;
-    if(GoodsListSubViewTab)GoodsListSubViewTab.style.display="flex";
-    if(CurOrderSubViewTab)CurOrderSubViewTab.style.display="flex";
-    if(HistoryOrderSubViewTab)HistoryOrderSubViewTab.style.display="flex";
+    if(ViewNow==1){
+        let GoodsListSubViewTab=document.getElementById("goodslist-sub-view-tab-"+subview[0]);
+        if(GoodsListSubViewTab){
+            GoodsListSubViewTab.style.display="none";    
+            subview[0]=0;
+            GoodsListSubViewTab.style.display="flex";
+        }
+    }
+    else if(ViewNow==2){
+        let CurOrderSubViewTab=document.getElementById("curorder-sub-view-tab-"+subview[1]);
+        if(CurOrderSubViewTab){
+            CurOrderSubViewTab.style.display="none";
+            subview[1]=0;
+            CurOrderSubViewTab.style.display="flex";
+        }
+    }
+    else if(ViewNow==3) {
+        let HistoryOrderSubViewTab=document.getElementById("historyorder-sub-view-tab-"+subview[2]);
+        if(HistoryOrderSubViewTab){
+            HistoryOrderSubViewTab.style.display="none";
+            subview[2]=0;
+            HistoryOrderSubViewTab.style.display="flex";
+        }
+    }
     
     document.getElementById("main-view-tab-"+view).style.display="flex";
     document.getElementById("tab-btn-bar-"+view).style.display="flex";

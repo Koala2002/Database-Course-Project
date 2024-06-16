@@ -19,6 +19,7 @@
         $response = [
             'isbn' => $ISBN,
             'name' => $bookname,
+            'error' => $DB->error,
         ];
 
         echo json_encode($response);

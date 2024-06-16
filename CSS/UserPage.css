@@ -1,7 +1,7 @@
 @import url(Theme.css);
 
 @media(min-width:0px){
-    #InformationBlock{width: calc(80vw - 50px);}
+    #InformationBlock{width:calc(62.5vw + 150px);}
 
     #user_inf{display:none;}
 
@@ -9,7 +9,7 @@
 }
 
 @media(min-width:1200px){
-    #InformationBlock{width: calc(50vw - 50px);}
+    #InformationBlock{width:calc(37.5vw + 150px);}
 }
 
 @media(min-height:0px){
@@ -17,7 +17,7 @@
 
     #InformationSelectList{display:none;}
 
-    #InformationBlock{width: calc(80vw - 50px);}
+    #InformationBlock{width:calc(62.5vw + 150px);}
 }
 
 @media(min-height:450px){
@@ -30,11 +30,11 @@
 }
 
 @media (min-height:450px) and (min-width:1200px){
-    #InformationBlock{width: calc(50vw - 50px);}
+    #InformationBlock{width:calc(37.5vw + 150px);}
 }
 
 @media(min-height:680px){
-    #user_inf{height:350px;}
+    #user_inf{height:calc((max(4vh,30px) + max(5vh,40px)) * 3 + 100px);}
 
     #InformationSelectList{
         height:120px;
@@ -59,8 +59,8 @@
 #user_inf{
     position: absolute;
     
-    top:calc(50px + 4vh);
-    left:10vw;
+    top:11vh;
+    left: var(--BlockOffset);
 
     flex-wrap: wrap;
     flex-direction: column;
@@ -69,10 +69,12 @@
 
     font-size: 1em;
 
-    width: calc(30vw - 50px - 25px);
+    width:25vw;
 
     padding:25px;
     
+    box-sizing: border-box;
+
     border-radius: 25px;
 
     background-color: var(--websitesecondColor);
@@ -82,21 +84,19 @@
     user-select: none;
 }
 
-
-
 .labelTitle{
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
 
-    height:25px;
-    width: 80px;
+    height:max(4vh,30px);
+    width: 5vw;
 
-    padding: 5px 10px;
 
     margin-top: 25px;
 
+    box-sizing: border-box;
 
     border-radius:15px 15px 0 0;
 
@@ -113,12 +113,12 @@
     align-items: center;
     justify-content: left;
 
-    height:25px;
-    width: calc(30vw - 50px - 25px - 30px);
+    height:max(5vh,40px);
+    width:calc(25vw - 50px);
 
+    box-sizing: border-box;
 
-
-    padding: 5px 15px;
+    padding: 0px 15px;
 
     border-radius: 0 15px 15px 15px;
 
@@ -131,10 +131,10 @@
 #InformationBlock{
     position: absolute;
     
-    top:calc(50px + 4vh);
-    right:10vw;    
+    top:11vh;
+    right:var(--BlockOffset);  
 
-    height:calc(92vh - 100px);
+    height:80vh;
 
     padding:25px;
 
@@ -143,6 +143,8 @@
     background-color: var(--websitesecondColor);
     
     box-shadow: var(--contentBlock-shadow);
+
+    box-sizing: border-box;
 
     user-select: none;
 }
@@ -187,8 +189,8 @@
 
     position: absolute;
     
-    bottom:4vh;
-    left:10vw;
+    bottom:9vh;
+    left: var(--BlockOffset);
 
     width: 150px;
 
@@ -240,10 +242,10 @@
     align-items: left;
     justify-content: left;
     
-    width: calc(50vw - 120px);
-    height:calc((92vh - 215px) / 6 - 20px - 50px / 6);
+    width:calc(37.5vw + 50px);
+    height:calc((80vh * 0.9 - 150px) / 5 - 4vh / 5);
 
-    margin-top: 10px;
+    margin-top: 1vh;
     
     border-radius:7.5px;
    
@@ -252,6 +254,7 @@
 
     box-shadow: var(--infContent-shadow);
 
+    box-sizing: border-box;
     padding: 10px;
 
     transition: background-color 0.1s;
@@ -272,12 +275,11 @@
     align-items: center;
     justify-content: center;
 
-    width: calc((50vw - 120px) * 0.3);
-    height:calc((92vh - 215px) / 6 - 20px - 50px / 6);
+    width: calc((37.5vw + 30px) * 0.3);
 }
 
 .Order-List-OrderID-Block{
-    width: calc((50vw - 120px) * 0.1);
+    width: calc((37.5vw + 30px) * 0.1);
 }
 
 

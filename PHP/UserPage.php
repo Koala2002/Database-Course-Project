@@ -16,6 +16,7 @@
     <script type="text/javascript" src="../JavaScript/TabViewButtonProcessor.js"></script>
     <script type="text/javascript" src="../JavaScript/OrderProcessor.js"></script>
     <script type="text/javascript" src="../JavaScript/GoodsListProcessor.js"></script>
+    <script type="text/javascript" src="../JavaScript/MsgProcessor.js"></script>
 
     
 

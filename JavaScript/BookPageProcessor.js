@@ -35,7 +35,7 @@ function BookInfoBuild(GoodsID){
             console.log(data);
             let Name=data["GoodsName"];
             let Price=data["GoodsPrice"];
-            let Number=data["GoodsPrice"];
+            let Number=data["GoodsNumber"];
             let Description=data["GoodsDescription"];
             let ISBN=data["GoodsISBN"];
             let Seller=data["GoodsSeller"];

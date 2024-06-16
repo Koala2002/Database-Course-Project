@@ -1,5 +1,7 @@
 @import url(Theme.css);
 
+
+
 #searchBlock{
     position: absolute;
     display: flex;
@@ -7,21 +9,24 @@
     justify-content: center;
     align-items: center;
 
-    top:calc(50px + 2vh);
+    top:11vh;
     left:0;
-    height: 50px;
+    height: 6vh;
     width: 100vw;
 
     user-select: none;
 }
 
 #querytext{
-    width: calc(40vw - 20px);
-    height: 40px;
+    width: 40vw;
+    height: 6vh;
 
-    padding-left: 20px;
+    padding-left: 25px;
+    padding-right: 25px;
     font-size: 1em;
+    
     border-radius:30px;
+    box-sizing: border-box;
 
     border:none;
     outline: none;
@@ -33,10 +38,10 @@
 
 #querybutton{
     position:absolute;
-    left:calc(70vw - 67.5px);
-    top:12.5px;
-    width:60px;
-    height:25px;
+    right:calc(30vw + 1vh);
+    top:1vh;
+    width:5vw;
+    height:4vh;
 
     border-radius: 30px;
     border:none;
@@ -44,7 +49,7 @@
     background-color: var(--linkBackground-color);
     transition: background-color 0.1s;
 
-    font-size: 0.5em;
+    font-size: 0.75em;
     color:var(--linkText-color);
 
     box-shadow: var(--linkshadow);
@@ -56,17 +61,26 @@
 }
 
 #goodsBlock{
-    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    position: absolute;    
+    
+    left: var(--BlockOffset);
     bottom: 0;
-    left:10vw;
-    width:80vw;
-    height: calc(96vh - 100px);
+
+    width:calc(62.5vw + 200px);
+    height: 80vh;
 
     border-radius: 25px 25px 0 0;
 
     background-color: var(--websitesecondColor);
 
     box-shadow: var(--contentBlock-shadow);
+    padding: 25px;
+
+    box-sizing: border-box;
 
     user-select: none;
 }

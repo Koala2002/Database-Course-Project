@@ -107,13 +107,13 @@
         /*fetch order from user database*/
         
         $len=count($orderData);
-        $tabnum=intdiv($len,6)+($len<6?1:($len%6>0));
+        $tabnum=intdiv($len,5)+($len<5?1:($len%5>0));
 
         for($tabid=0;$tabid<$tabnum;$tabid++){
             echo "<div class='ViewTab order-view' id='curorder-sub-view-tab-$tabid'>";
             
-            for($id=0;$id<min(6,$len-6*$tabid);$id++){
-                $item_id=$tabid*6+$id;
+            for($id=0;$id<min(5,$len-5*$tabid);$id++){
+                $item_id=$tabid*5+$id;
 
                 echo "<div class='Order-List-Block'>";
                 
@@ -198,13 +198,13 @@
         /*fetch historyorder from user database*/
         
         $len=count($orderData);
-        $tabnum=intdiv($len,6)+($len<6?1:($len%6>0));
+        $tabnum=intdiv($len,5)+($len<5?1:($len%5>0));
 
         for($tabid=0;$tabid<$tabnum;$tabid++){
             echo "<div class='ViewTab order-view' id='historyorder-sub-view-tab-$tabid'>";
             
-            for($id=0;$id<min(6,$len-6*$tabid);$id++){
-                $item_id=$tabid*6+$id;
+            for($id=0;$id<min(5,$len-5*$tabid);$id++){
+                $item_id=$tabid*5+$id;
 
                 echo "<div class='Order-List-Block'>";
                 
