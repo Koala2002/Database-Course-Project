@@ -243,7 +243,7 @@
 
 .Book-Number-Price-Description-Block{
     display: flex;
-    width:calc((50vw - 210px) / 3);
+    width:calc(12.5vw - 20px);
 }
 
 .Book-Number-Price-Block{
@@ -263,11 +263,11 @@
 }
 
 .NewGoods-Book-Number-Block,.NewGoods-Book-Price-Block{
-    width:calc((50vw - 210px) / 3 * 0.45 - 10px);
+    width:calc((12.5vw - 20px)  * 0.45 - 10px);
 }
 
 .Book-Description-Block{
-    width:calc((50vw - 210px) / 3 * 0.55 - 10px);
+    width:calc((12.5vw - 20px)  * 0.55 - 10px);
 }
 /*newgoods theme*/
 

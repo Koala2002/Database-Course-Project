@@ -51,7 +51,7 @@
 }
 
 #GoodsInfInputBlock input{
-    width: calc(max(7.5vw,6vh)*2 + 25px);
+    width: calc(max(7.5vw,6vh)*2.5 + 25px);
     height:6vh;
 
     margin-bottom: 30px;
@@ -82,7 +82,7 @@
     flex-wrap: wrap;
     justify-content: space-between;
 
-    width: calc(max(7.5vw,6vh)*2 + 25px);
+    width: calc(max(7.5vw,6vh)*2.5 + 25px);
     height:40px;
 }
 
@@ -111,8 +111,8 @@
 
 
 #GoodsInfInputBlock textarea{
-    width: calc(max(7.5vw,6vh)*2 + 25px);
-    height:20vh;
+    width: calc(max(7.5vw,6vh)*2.5 + 25px);
+    height:25vh;
 
     margin-bottom: 30px;
 
@@ -123,6 +123,8 @@
     background-color:var(--input-background-color);
 
     user-select: none;
+
+    font-size: 1em;
 
     border:none;
     outline: none;
@@ -200,7 +202,7 @@
 
     position: absolute;
     right:50px;
-    bottom:25px;
+    bottom:75px;
 
     background-color: var(--linkBackground-color);
     transition: background-color 0.1s;

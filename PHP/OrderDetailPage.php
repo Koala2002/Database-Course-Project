@@ -1,8 +1,6 @@
 <?php
-
     require_once("DB/DB_Common.php");
     require_once("DB/DB_OrderDetail.php");
-    echo $_POST["OrderID"];
 ?>
 
 <!DOCTYPE html>
@@ -19,6 +17,7 @@
     <script type="text/javascript" src="../JavaScript/OrderProcessor.js"></script>
     <script type="text/javascript" src="../JavaScript/HeaderBuilder.js"></script>
     <script type="text/javascript" src="../JavaScript/MsgProcessor.js"></script>
+    <script type="text/javascript" src="../JavaScript/ChatSystemProcessor.js"></script>
 
     <title>School Book Store</title>
 </head>
@@ -26,7 +25,7 @@
 <body>
     <script>CartChecker();</script>
     <div id="header">
-        <script>UserLoginHeaderBuild('../','');</script>;
+        <script>UserLoginHeaderBuild('../','');</script>
     </div>
 
     <div id="Detail-Block">
@@ -63,16 +62,21 @@
             <div id="Order-Detail-State-Block">
                 <?php OrderStateViewBuild($loginsys,$orderData,$loginuser)?>
             </div>
-            <div id="Order-Detail-Chat-Block">
-                <div id="chat-Block">
-                    
-                </div>
-                <textarea id="chat-input-Block" placeholder="請輸入訊息"></textarea>
+            <div id='Order-Detail-Chat-Block'>
+                <div id="chat-Block"></div>
+                <?php
+                    if($orderData["ord_state"]>='0'&&$orderData["ord_state"]<='3'){
+                        echo "
+                            <textarea id='chat-input-Block' placeholder='請輸入訊息(最多100字)' maxlength='100'></textarea>
+                        ";
+                    }
+                ?>
             </div>
         </div>
     </div>
     <script>
         OrderCheckButtonSetting();
+        <?php echo "GetChatData('{$orderData["ord_id"]}','{$loginuser}');"?>
     </script>
 </body>
 </html>

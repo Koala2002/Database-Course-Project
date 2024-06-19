@@ -12,6 +12,16 @@ function tabInit(){
 
     document.getElementById("MainPage-tab-btn-"+urlhash[1]).click();
 }
+
+function SortChange(){
+    let orderNow=document.getElementById("SortType");
+    
+    if(orderNow.value=="down")orderNow.value="up";
+    else orderNow.value="down";
+
+    document.getElementById("search").submit();
+}
+
 window.onload=()=>{
     document.getElementById("search").addEventListener("submit",()=>{
         history.replaceState(null, null, window.location.pathname + window.location.search);

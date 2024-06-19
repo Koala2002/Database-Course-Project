@@ -58,7 +58,7 @@
     flex-direction: column;    
    
     width:calc(62.5vw + 200px - (50vw * 0.85 + 25px) - 60px);
-    height:calc((80vh - 50px) / 2);
+    height:calc((80vh - 50px) * 0.4);
     
 
     
@@ -76,7 +76,7 @@
     bottom:0;
 
     width:calc(62.5vw + 200px (50vw * 0.85 + 25px) - 60px);
-    height:calc((80vh - 50px) / 2);
+    height:calc((80vh - 50px) * 0.6);
 
 
     box-sizing: border-box;overflow: none;
@@ -90,7 +90,7 @@
     flex-wrap: wrap;
   
     width:calc(62.5vw + 200px (50vw * 0.85 + 25px) - 60px);
-    height:calc((80vh - 50px) / 2 * 0.2);
+    height:calc((80vh - 50px) * 0.4 * 0.2);
 
     font-size: 1.25em;
 
@@ -117,7 +117,7 @@
     padding: 25px;
 
     width:calc(62.5vw + 200px (50vw * 0.85 + 25px) - 60px);
-    height:calc((80vh - 50px) / 2 * 0.8);
+    height:calc((80vh - 50px) * 0.4 * 0.8);
     
   
     box-sizing: border-box;
@@ -135,8 +135,8 @@
     border:none;
     border-radius: 30px;
 
-    width: 60px;
-    height: 30px;
+    width: 6vw;
+    height: 4vh;
 
     
     font-size: 1em;
@@ -156,7 +156,7 @@
 
 .ord-list-btn-accept{
     background-color: var(--accept-btn-background-color);
-    right: 95px;
+    right: calc(50px + 6vw);
 }
 .ord-list-btn-reject,.ord-list-btn-terminate{
     background-color: var(--reject-btn-background-color);
@@ -164,14 +164,17 @@
 }
 .ord-list-btn-complete{
     background-color: var(--complete-btn-background-color);
-    right: 95px;
+    right: calc(50px + 6vw);
 }
 
 #chat-Block{
+   
     width:calc(62.5vw + 200px - (50vw * 0.85 + 25px) - 60px);
-    height:calc((80vh - 50px) / 2 * 0.6);
+    height:calc((80vh - 50px) * 0.6 * 0.8);
 
     padding: 20px;
+
+    margin-right: 20px;
 
     border-radius:15px;
 
@@ -186,6 +189,8 @@
     resize:none;
     box-sizing: border-box;
 
+    overflow-y: auto;
+
     &:focus{
         border:2px solid var(--websitebackground-color);
       
@@ -194,7 +199,7 @@
 
 #chat-input-Block{
     width:calc(62.5vw + 200px - (50vw * 0.85 + 25px) - 60px);
-    height:calc(2.4em + 24px);
+    height:calc((80vh - 50px) * 0.6 * 0.2 - 25px);
 
     padding:10px;
 
@@ -211,12 +216,39 @@
     
     font-size: 1em;
     line-height: 1.2em;
-    
-    overflow: none;
+
+    box-sizing: border-box;
+
     &:focus{
         border:2px solid var(--websitebackground-color);
-        
     }
 
     
+}
+
+.chat-item-container{
+    display: flex;
+
+    padding: 10px;
+}
+
+.chat-item{
+    box-sizing: border-box;
+    color: var(--websitesecondColor);
+
+    background-color: var(--websitethirdColor);
+    padding: 10px;
+   
+    border-radius: 10px;
+    
+    max-width:calc((62.5vw + 200px - (50vw * 0.85 + 25px) - 60px) / 2.5);
+    
+    white-space: pre-wrap;
+    word-wrap: break-word; /* Alias for overflow-wrap */
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+
+.chat-item-container:first-child{
+    margin-top: 0;
 }

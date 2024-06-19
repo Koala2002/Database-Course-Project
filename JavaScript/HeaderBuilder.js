@@ -1,8 +1,9 @@
 function OnlyHomeLinkBuild(indexPrefix){
     header="\
     <div id='header-bar'></div>\
-    <a href='"+indexPrefix+"index.php' id='HomeLink'>🛖</a>";
-
+    <a href='"+indexPrefix+"index.php' id='System-Title'>📖校園二手書局📖</a>\
+    <button onclick=DeveloperInfControl() id='DeveloperInformationBtn'>❔</button>\
+    <div id='DeveloperInfBlock'></div>";
     document.write(header);
 }
 
@@ -10,7 +11,8 @@ function UserUnLoginHeaderBuild(indexPrefix,phpPrefix){
     header="\
     <div id='header-bar'></div>\
     <a href='"+indexPrefix+"index.php' id='System-Title'>📖校園二手書局📖</a>\
-    <a href='"+indexPrefix+"index.php' id='HomeLink'>🛖</a>\
+    <button onclick=DeveloperInfControl() id='DeveloperInformationBtn'>❔</button>\
+    <div id='DeveloperInfBlock'></div>\
     <a href='"+phpPrefix+"LoginPage.php' id='LoginLink'>Login</a>";
 
     document.write(header);
@@ -25,7 +27,8 @@ function UserLoginHeaderBuild(indexPrefix,phpPrefix){
             header="\
             <div id='header-bar'></div>\
             <a href='"+indexPrefix+"index.php' id='System-Title'>📖校園二手書局📖</a>\
-            <a href='"+indexPrefix+"index.php' id='HomeLink'>🛖</a>\
+            <button onclick=DeveloperInfControl() id='DeveloperInformationBtn'>❔</button>\
+            <div id='DeveloperInfBlock'></div>\
             <a href='"+phpPrefix+"newGoodsPage.php?GoodsNum=0&State=0' id='newGoodsLink'>➕</a>\
             <button onclick=MailBoxControl() id='MailBoxBtn'>✉️</button>\
             <a href='"+phpPrefix+"UserPage.php?UserID="+data["UserID"]+"' id='UserPageLink'>Profile</a>\
@@ -40,22 +43,46 @@ function UserLoginHeaderBuild(indexPrefix,phpPrefix){
 
 /*MailBox Checker*/
 var BoxState=0,mailBox;
+var inMainPage=window.location.hash.match("MainPage");
+var mailContentContainer=null;
 
 function MailBoxControl(){   
     if(BoxState)mailBox.style.top = "-60vh";
-    else mailBox.style.top = "8vh";
-
+    else {
+        mailBox.style.top = "8vh";
+        GetMailData();
+    }
     BoxState=!BoxState;
 }
 
-function MailBoxContentBuild(container){
-    let inMainPage=window.location.hash.match("MainPage");
+function MailRead(ID,container){
+    $.ajax({
+        url:"../PHP/API/API_MailSetRead.php",
+        type:"POST",
+        data:{MailID:ID},
+        success:(result)=>{
+            console.log(result);
+            container.style.backgroundColor="var(--websitesecondColor)";
+                
+            container.addEventListener('mouseover', ()=>{
+                container.style.backgroundColor="var(--contentBlock-hover-background-color)";
+            });
+            
+            container.addEventListener('mouseout', ()=>{
+                container.style.backgroundColor="var(--websitesecondColor)";
+            });
+},
+        error:(error)=>{console.log(error,"In File HeaderBuilder.js MailRead(ID) API fail");}
+    });
+}
 
+function GetMailData(){
     $.ajax({
         url:"../PHP/API/API_GetMailData.php",
         type:"POST",
         async:false,
         success:(data) => {
+            mailContentContainer.innerHTML = "";
             data["data"].forEach((row,idx)=>{
                 let mailRowContainer=document.createElement("div");
                 mailRowContainer.setAttribute("class", "Mail-Row-Container");
@@ -72,6 +99,28 @@ function MailBoxContentBuild(container){
                             <a class='mail-link' href='UserPage.php?UserID="+row["sender_id"]+"'>"+row["sender_id"]+"</a>\
                         "
                     }
+                }
+
+                if(row["mail_state"]=='1'){
+                    mailRowContainer.style.backgroundColor="var(--websitesecondColor)";
+                
+                    mailRowContainer.addEventListener('mouseover', ()=>{
+                        mailRowContainer.style.backgroundColor="var(--contentBlock-hover-background-color)";
+                    });
+                   
+                    mailRowContainer.addEventListener('mouseout', ()=>{
+                        mailRowContainer.style.backgroundColor="var(--websitesecondColor)";
+                    });
+                }
+                else{
+                    mailRowContainer.style.backgroundColor="var(--MailUnReadBackground)";
+                    mailRowContainer.addEventListener('mouseover', ()=>{
+                        mailRowContainer.style.backgroundColor="var(--MailUnReadHoverBackground)";
+                    });
+                   
+                    mailRowContainer.addEventListener('mouseout', ()=>{
+                        mailRowContainer.style.backgroundColor="var(--MailUnReadBackground)";
+                    });
                 }
 
                 $.ajax({
@@ -105,6 +154,7 @@ function MailBoxContentBuild(container){
                         
                                 document.body.appendChild(form);
                                 form.submit();
+                                form.remove();
                             });
                         }
                         else {
@@ -153,9 +203,9 @@ function MailBoxContentBuild(container){
                     }
                 });
 
+                mailRowContainer.addEventListener("click",()=>{MailRead(row["mail_id"],mailRowContainer);});
 
-
-                container.appendChild(mailRowContainer);
+                mailContentContainer.appendChild(mailRowContainer);
             });
         },
         error:(error) => {
@@ -180,19 +230,45 @@ function CartChecker(){
 }
 /*Cart Checker*/
 
+/*Creator Information*/
+function DeveloperInfBlockBuild(){
+    let Info="\
+        <div id='developer-inf'>\
+            <div id='title'>開發者</div>\
+            <div id='item'>資工甲班 吳瑋修</div>\
+            <div id='item'>資工甲班 吳俊憲</div>\
+            <div id='item'>資工甲班 林獻堂</div>\
+            <div id='item'>資工甲班 邱立翰</div>\
+        </div>\
+        <div id='bottom-inf'>Site design 2024/05/15 ~ 2024/06/20 © NFU 資訊工程系 - 資料庫系統專題</div>\
+    ";
+
+    let block=document.getElementById("DeveloperInfBlock");
+    block.innerHTML=Info;   
+}
+
+function DeveloperInfControl(){
+    let block=document.getElementById("DeveloperInfBlock");
+    console.log(block.style.top);
+
+    if(block.style.top=="8vh")block.style.top="-92vh";
+    else block.style.top="8vh";
+}
+/*Creator Information*/
+
 $(document).ready(()=>{
+    DeveloperInfBlockBuild();
     mailBox=document.getElementById("MailBox");
     
     if(!mailBox)return;
 
-    let mailContentContainer=document.createElement("div");
+    mailContentContainer=document.createElement("div");
     mailContentContainer.setAttribute("id","mailContentContainer");
     mailBox.appendChild(mailContentContainer);
-
-    MailBoxContentBuild(mailContentContainer);
 
     let mailContentShadow=document.createElement("div");
     mailContentShadow.setAttribute("id","mailContentShadow");
     mailBox.appendChild(mailContentShadow);
-
+    
+    GetMailData();
 });

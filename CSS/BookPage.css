@@ -31,7 +31,7 @@
 
     height:calc(80vh - 50px);
     width:calc((62.5vw + 200px) * 0.3 );
-    background-color: rgb(219, 210, 255);
+   
 }
 
 #Book-INF-Block{

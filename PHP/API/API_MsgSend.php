@@ -12,15 +12,25 @@
         $_POST["MailType"]==7
     ){
         $user_id=mysqli_query($DB,"
-            SELECT ord_buyer,ord_seller 
+            SELECT ord_buyer,ord_seller,ord_state 
             FROM OrderForm_SELECT_ARScBc_ViewForLoginUser
             WHERE ord_id='{$_POST["ItemID"]}'
         ");
 
-        $user_id=mysqli_fetch_array($user_id);
+        $orddata=mysqli_fetch_array($user_id);
 
-        if($user_id["ord_buyer"]==$loginuser)$user_id=$user_id["ord_seller"];
-        else $user_id=$user_id["ord_buyer"];
+        if($orddata["ord_state"]>'3'){
+            echo json_encode([
+                'result'=>"falied",
+                'dberror'=>$DB->error,
+            ]);
+
+            return;
+        }
+
+        $user_id=null;
+        if($orddata["ord_buyer"]==$loginuser)$user_id=$orddata["ord_seller"];
+        else $user_id=$$orddata["ord_buyer"];
     }
 
     if(//各種訂單事件，只是顯示格式不同，傳送的訊息類型一樣
@@ -41,14 +51,14 @@
         mysqli_query($DB,"
             INSERT INTO OrderMessageViewForLoginUser
             (msg_id,ord_id)
-            VALUES('{$mail_id}','{$_POST["ItemID"]}')"
+            VALUES({$mail_id},{$_POST["ItemID"]})"
         );
 
-        if($_POST==7){//用戶訊息
+        if($_POST["MailType"]==7){//用戶訊息
             mysqli_query($DB,"
                 INSERT INTO UserMessageViewForLoginUser
                 (msg_id,msg_msg)
-                VALUES('{$mail_id}','{$_POST["UserMsg"]}')"
+                VALUES({$mail_id},'{$_POST["UserMsg"]}')"
             );
         }
     }

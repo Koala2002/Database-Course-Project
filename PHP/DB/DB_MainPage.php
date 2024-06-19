@@ -2,7 +2,7 @@
     require_once("DB_Common.php");
 
     /*fetch all goods from database*/
-    $SQL="";
+    $SQL="(";
     $goodslistData=array();
       
     $sql_data=SearchStatement_ToSQL(isset($_GET["Search"])?$_GET["Search"]:null,$loginstate);
@@ -10,14 +10,30 @@
     for($id=0;$id<count($sql_data);$id++){
         
         $SQL.= $sql_data[$id];
-        if($id==count($sql_data)-1)continue;
-        $SQL.= " UNION ";
+        if($id==count($sql_data)-1)$SQL.=")";
+        else $SQL.= " UNION ";
     }
 
+    $SQL="SELECT * FROM ".$SQL;
+    $SQL.=" G ";
+
+    $minP=0;
+    $maxP=10000;
+    if(isset($_GET["minPrice"])){
+        if($_GET["minPrice"]!="")$minP=max(0,min(10000,$_GET["minPrice"]));
+    }
+    if(isset($_GET["maxPrice"])){
+        if($_GET["maxPrice"]!="")$maxP=max($minP,min(10000,$_GET["maxPrice"]));
+    }
+    $SQL.=" WHERE G.price>={$minP} AND G.price<={$maxP}";
+    
+    if(isset($_GET["SortType"])&&$_GET["SortType"]=='up')$SQL.=" ORDER BY G.price DESC";
+    else $SQL.=" ORDER BY G.price";
+    
     $result=null;
     $result=mysqli_query($DB,$SQL);
 
-
+    echo $SQL;
     while($result&&$row=mysqli_fetch_array($result))array_push($goodslistData,$row);
     /*fetch all goods from database*/
 

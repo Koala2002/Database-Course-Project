@@ -30,7 +30,22 @@
 
     function GoodsListView($db,$account){
         /*fetch goods from user database*/
-        $result=mysqli_query($db,"SELECT * FROM Goods_SELECT_ViewForLoginUser WHERE user_id='$_GET[UserID]'");
+
+        $minP=0;
+        $maxP=10000;
+        $ORD="ASC";
+        if(isset($_POST["minPrice"])){
+            if($_POST["minPrice"]!="")$minP=max(0,min(10000,$_POST["minPrice"]));
+        }
+        if(isset($_POST["maxPrice"])){
+            if($_POST["maxPrice"]!="")$maxP=max($minP,min(10000,$_POST["maxPrice"]));
+        }
+        if(isset($_POST["goods-sort"])){
+            $ORD=$_POST["goods-sort"]=='up'?"DESC":"ASC";
+        }
+       
+
+        $result=mysqli_query($db,"SELECT * FROM Goods_SELECT_ViewForLoginUser WHERE user_id='$_GET[UserID]' AND price>={$minP} AND price<={$maxP} ORDER BY price $ORD");
         $goodslistData=array();
         print_r($db->error);
         while($row=mysqli_fetch_array($result))array_push($goodslistData,$row);
@@ -52,7 +67,7 @@
 
                 
                 $item_id=$tabid*6+$id;
-           
+                
                 $bookname=$goodslistData[$item_id]["goods_name"];
                 $bookprice=$goodslistData[$item_id]["price"];
                 $booknum=$goodslistData[$item_id]["number"];
@@ -96,12 +111,41 @@
     function CurOrderListView($db,$account){
         if($account!=$_GET["UserID"])return;
         /*fetch order from user database*/
+
+        $minT="";
+        $maxT="";
+        $ORD="ASC";
+        $TimeQ="";
+        $StateQ="";
+
+        if(isset($_POST["c-minTime"])){
+            if($_POST["c-minTime"]!=""){
+                $minT=date('Y-m-d H:i:s', strtotime($_POST["c-minTime"]));
+                $TimeQ.=" AND ord_ordtime>='{$minT}'";
+            }
+        }
+        if(isset($_POST["c-maxTime"])){
+            if($_POST["c-maxTime"]!=""){
+                $maxT=date('Y-m-d H:i:s', strtotime($_POST["c-maxTime"]));
+                $TimeQ.=" AND ord_ordtime<='{$maxT}'";
+            }
+        }
+        if(isset($_POST["curorder-state"])){
+            if($_POST["curorder-state"]=="尚未確認")$StateQ=" AND ord_state='0'";
+            if($_POST["curorder-state"]=="交易中")$StateQ=" AND ord_state>='1' AND ord_state<='3'";
+        }
+
+        if(isset($_POST["cord-sort"])){
+            $ORD=$_POST["cord-sort"]=='up'?"DESC":"ASC";
+        }
+
         $result=mysqli_query($db,"
             SELECT * FROM OrderForm_SELECT_ARScBc_ViewForLoginUser
-            WHERE ord_seller='$account' OR ord_buyer='$account'
-            ORDER BY ord_seller='$account' DESC
+            WHERE (ord_seller='$account' OR ord_buyer='$account') $TimeQ $StateQ
+            ORDER BY ord_ordtime $ORD
         ");
-        print_r($db->error);
+
+        echo $db->error;
         $orderData=array();
         while($row=mysqli_fetch_array($result))array_push($orderData,$row);
         /*fetch order from user database*/
@@ -187,10 +231,40 @@
     function HistoryOrderInf($db,$account){
         if($account!=$_GET["UserID"])return;
         /*fetch historyorder from user database*/ 
+        $minT="";
+        $maxT="";
+        $ORD="ASC";
+        $TimeQ="";
+        $StateQ="";
+
+        if(isset($_POST["h-minTime"])){
+            if($_POST["h-minTime"]!=""){
+                $minT=date('Y-m-d H:i:s', strtotime($_POST["h-minTime"]));
+                $TimeQ.=" AND ord_ordtime>='{$minT}'";
+            }
+        }
+        if(isset($_POST["h-maxTime"])){
+            if($_POST["h-maxTime"]!=""){
+                $maxT=date('Y-m-d H:i:s', strtotime($_POST["h-maxTime"]));
+                $TimeQ.=" AND ord_ordtime<='{$maxT}'";
+            }
+        }
+        if(isset($_POST["historyorder-state"])){
+            if($_POST["historyorder-state"]=="交易完成")$StateQ=" AND ord_state='4'";
+            if($_POST["historyorder-state"]=="已被拒絕")$StateQ=" AND ord_state='5'";
+            if($_POST["historyorder-state"]=="用戶中止")$StateQ=" AND ord_state='6'";
+            if($_POST["historyorder-state"]=="系統中止")$StateQ=" AND ord_state='7'";
+        }
+        
+        if(isset($_POST["hord-sort"])){
+            $ORD=$_POST["hord-sort"]=='up'?"DESC":"ASC";
+        }
+
+
         $result=mysqli_query($db,"
             SELECT * FROM OrderForm_FcUtSt_ViewForLoginUser
-            WHERE (ord_buyer='$account' OR ord_seller='$account') AND (ord_state>='4' AND ord_state<='6')
-            ORDER BY ord_seller='$account' DESC
+            WHERE (ord_buyer='$account' OR ord_seller='$account') $TimeQ $StateQ
+            ORDER BY ord_ordtime $ORD
         ");
 
         $orderData=array();

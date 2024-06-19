@@ -192,11 +192,13 @@
     bottom:9vh;
     left: var(--BlockOffset);
 
-    width: 150px;
-
+    height: calc(80vh - ((max(4vh,30px) + max(5vh,40px)) * 3 + 100px) - 50px);
+    
     padding:25px;
 
     border-radius: 25px;
+
+    box-sizing: border-box;
 
     background-color: var(--websitesecondColor);
     
@@ -216,8 +218,8 @@
     border:none;
     border-radius: 30px;
 
-    width: 150px;
-    height: 35px;
+    width: 6vw;
+    height: 5vh;
 
     font-size: 1em;
 
@@ -232,6 +234,148 @@
         background-color:  var(--linkBackground-hover-color);
         cursor:pointer;
     }
+}
+
+#SortSettingBlock{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+
+    justify-content: space-between;
+    align-items: center;
+
+    position: absolute;
+    
+    bottom:9vh;
+    left: calc(var(--BlockOffset) + 6vw + 100px);
+
+    height: calc(80vh - ((max(4vh,30px) + max(5vh,40px)) * 3 + 100px) - 50px);
+    width:calc(19vw - 100px);
+
+    padding:25px;
+
+    border-radius: 25px;
+
+    box-sizing: border-box;
+
+    background-color: var(--websitesecondColor);
+    
+    box-shadow: var(--contentBlock-shadow);
+
+    user-select: none;
+}
+
+#SortSettingBlock button{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    border:none;
+    border-radius: 30px;
+
+    width: 6vw;
+    height: 4vh;
+
+    margin-right: 10px;
+
+    font-size: 1em;
+
+    background-color:  var(--websitebackground-color);
+    color:var(--linkText-color);
+    text-decoration:none;
+
+    user-select: none;
+
+    box-shadow: var(--linkshadow);
+
+    &:hover{
+        background-color:  var(--linkBackground-hover-color);
+        cursor:pointer;
+    }
+}
+
+.sortview{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    justify-content: space-between;
+
+    height: calc(80vh - ((max(4vh,30px) + max(5vh,40px)) * 3 + 100px) - 100px);
+    width:calc(19vw - 150px);
+}
+
+.sortview input[type="number"]{
+    width: 6vw;
+    height: 4vh;
+    font-size: 1em;
+
+    background-color:var(--websitebackground-color);
+    color: var(--websitesecondColor);
+    border-radius: 5px;
+
+    border: none;
+    outline: none;
+
+    padding-left: 5px;
+    padding-right: 5px;
+
+    box-sizing: border-box;
+}
+
+.sortview select{
+    width: 8vw;
+    height: 4vh;
+    border: none;
+    outline: none;
+
+    border-radius: 5px;
+
+    font-size: 1em;
+  
+
+    background-color: var(--websitebackground-color);
+    color: var(--websitesecondColor);
+
+    &:hover{cursor: pointer;}
+}
+
+.sortview input[type="datetime-local"]{
+    height: 4vh;
+    font-size: 0.75em;
+
+    border-radius: 5px;
+
+    outline: none;
+    border: none;
+
+    background-color: var(--websitebackground-color);
+    color: var(--websitesecondColor);
+}
+
+.sortText{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 8vw;
+    height: 4vh;
+    font-size: 1em;
+
+    border-radius: 5px;
+    border: none;
+
+    padding-left: 0px;
+    padding-right: 0px;
+
+    outline: none;
+
+    background-color:var(--websitethirdColor);
+
+    user-select: none;
+    
+    &:hover{cursor: pointer;}
 }
 
 /*OrderView*/
@@ -274,8 +418,15 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+}
 
-    width: calc((37.5vw + 30px) * 0.3);
+.Order-List-UserId-Block{
+    width: calc((37.5vw + 30px) * 0.2);
+}
+
+.Order-List-State-Block,
+.Order-List-OrderTime-Block{
+    width: calc((37.5vw + 30px) * 0.35);
 }
 
 .Order-List-OrderID-Block{
@@ -305,8 +456,8 @@
     border:none;
     border-radius: 30px;
 
-    width: 60px;
-    height: 30px;
+    width: 6vw;
+    height: 4vh;
 
     margin-right: 10px;
 

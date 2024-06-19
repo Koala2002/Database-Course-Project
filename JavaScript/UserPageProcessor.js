@@ -1,4 +1,5 @@
 var ViewNow=1,subview=[0,0,0];
+var sortview;
 
 function TabInit(){
     let urlhash=window.location.hash;//url hash
@@ -84,17 +85,24 @@ window.addEventListener("hashchange",(event)=>{
 });
 
 function ViewChange(view){
+    let urlhash=window.location.hash;//url hash
+    urlhash=urlhash.slice(1).split('-');
+    sortview[urlhash[0]].style.display = "none";
+
     if(view==1){
         window.location.hash="GoodsList-0";
         document.getElementById("GoodsList-tab-btn-0").click();
+        sortview["GoodsList"].style.display = "flex";
     }
     else if(view==2){
         window.location.hash="CurOrder-0";
         document.getElementById("CurOrder-tab-btn-0").click();
+        sortview["CurOrder"].style.display = "flex";
     }
     else if(view==3){
         window.location.hash="HistoryOrder-0";
         document.getElementById("HistoryOrder-tab-btn-0").click();
+        sortview["HistoryOrder"].style.display = "flex";
     }
     document.getElementById("main-view-tab-"+ViewNow).style.display="none";
     document.getElementById("tab-btn-bar-"+ViewNow).style.display="none";
@@ -109,6 +117,7 @@ function ViewChange(view){
     
     if(ViewNow==1){
         let GoodsListSubViewTab=document.getElementById("goodslist-sub-view-tab-"+subview[0]);
+        
         if(GoodsListSubViewTab){
             GoodsListSubViewTab.style.display="none";    
             subview[0]=0;
@@ -156,6 +165,59 @@ function OrderDetailLinkSetting(){
 
             document.body.appendChild(form);
             form.submit();
+            form.remove();
         });
     });
+}
+
+
+
+function SortBlockSetting(){
+    sortview={
+        "GoodsList":document.getElementById("goodslist-sort-view"),
+        "CurOrder":document.getElementById("curorder-sort-view"),
+        "HistoryOrder":document.getElementById("historyorder-sort-view")
+    };
+
+    for(let key in sortview){
+        if(sortview[key]){
+            sortview[key].style.display = "none";           
+        }
+    };
+
+    let urlhash=window.location.hash;//url hash
+    urlhash=urlhash.slice(1).split('-');
+
+    sortview[urlhash[0]].style.display = "flex";
+}
+
+function viewsort(view){
+    let urlhash=window.location.hash;//url hash
+    urlhash=urlhash.slice(1).split('-');
+    window.location.hash=urlhash[0]+"-0";
+
+    if(view=="GoodsList"){
+        let orderNow=document.getElementById("goods-sort");
+    
+        if(orderNow.value=="down")orderNow.value="up";
+        else orderNow.value="down";
+
+        document.getElementById("goodslist-sort-view").submit();
+    }
+    if(view=="CurOrder"){
+        let orderNow=document.getElementById("cord-sort");
+    
+        if(orderNow.value=="down")orderNow.value="up";
+        else orderNow.value="down";
+
+        document.getElementById("curorder-sort-view").submit();
+    }
+    if(view=="HistoryOrder"){
+        let orderNow=document.getElementById("hord-sort");
+    
+        if(orderNow.value=="down")orderNow.value="up";
+        else orderNow.value="down";
+
+        document.getElementById("historyorder-sort-view").submit();
+    }
 }

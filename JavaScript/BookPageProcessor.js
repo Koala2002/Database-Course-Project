@@ -7,6 +7,13 @@ function addGoodsInCart(){
                 );
 
     let number=document.getElementById("order-number-input").value;
+
+    if(!(/^\d+$/.test(number))||parseInt(number)<1||parseInt(number)>100){
+        document.getElementById("order-number-input").style.border="2px solid red";
+        return;
+    }
+    
+
     let requirement=document.getElementById("order-require-input").value;
         
 

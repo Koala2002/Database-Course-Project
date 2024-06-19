@@ -6,15 +6,32 @@
     position: absolute;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 
     top:11vh;
-    left:0;
+    right:var(--BlockOffset);
     height: 6vh;
-    width: 100vw;
+    width:calc(62.5vw + 200px);
+
+    
+
+    box-sizing: border-box;
 
     user-select: none;
+}
+
+#search{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width:calc(62.5vw + 200px);
+
+    padding-left: 5vw;
+    padding-right: 5vw;
+
+    box-sizing: border-box;
 }
 
 #querytext{
@@ -38,7 +55,7 @@
 
 #querybutton{
     position:absolute;
-    right:calc(30vw + 1vh);
+    right:calc(1vh + 5vw);
     top:1vh;
     width:5vw;
     height:4vh;
@@ -58,6 +75,94 @@
         background-color:  var(--linkBackground-hover-color);
         cursor:pointer;
     }
+}
+
+#SortSettingBlock{
+    
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    
+    height: 6vh;
+    width: calc(12.5vw + 150px);
+
+    padding-left: 25px;
+    padding-right: 25px;
+
+    background-color:var(--websitesecondColor);
+    box-shadow: var(--contentBlock-shadow);
+    
+    border-radius:25px; 
+
+    box-sizing: border-box;
+
+    user-select: none;
+}
+
+#sort-type-block{
+    display: flex;
+    align-items: center;
+    justify-content: left;
+
+    height: 6vh;
+    width: calc((12.5vw + 100px) * 0.2);
+
+    
+}
+
+#price-ord-block{
+    display: flex;
+    align-items: center;
+    justify-content: right;
+
+    height: 6vh;
+    width: calc((12.5vw + 100px) * 0.8);
+
+   
+}
+
+#SortSettingBlock input[type="number"]{
+    width: 6vw;
+    height: 4vh;
+    font-size: 1em;
+
+    background-color:var(--websitebackground-color);
+    color: var(--websitesecondColor);
+    border-radius: 5px;
+
+    border: none;
+    outline: none;
+
+    padding-left: 5px;
+    padding-right: 5px;
+
+    box-sizing: border-box;
+}
+
+#SortSettingBlock #SortType-input{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 3vw;
+    height: 4vh;
+    font-size: 1em;
+
+    border-radius: 5px;
+    border: none;
+
+    padding-left: 0px;
+    padding-right: 0px;
+
+    outline: none;
+
+    background-color:var(--websitethirdColor);
+
+    user-select: none;
+    
+    &:hover{cursor: pointer;}
 }
 
 #goodsBlock{

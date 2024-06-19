@@ -22,7 +22,7 @@
     font-size: 1em;
 }
 
-#FormBlock input[type="text"]{
+#FormBlock input[type="text"],#FormBlock input[type="password"]{
     width:calc(20vw - 25px);
     height: 6vh;
     margin-bottom: 25px;

@@ -1,3 +1,5 @@
+window.add
+
 function OrderDetailBuild(ID){
     console.log(ID);
     let List=document.getElementById('Cart-List-Content');
@@ -7,6 +9,9 @@ function OrderDetailBuild(ID){
         type:"POST",
         data:{OrderID:ID},
         success:(data)=>{
+            let totalbooks=0;
+            let allgoodstotalprice=0;
+
             data["detail"].forEach((detail)=>{
                 let item=document.createElement('tr');
                 let Name,Price;
@@ -48,7 +53,9 @@ function OrderDetailBuild(ID){
                 itemNumber.innerHTML=Number;
                 itemTotalPrice.innerHTML=parseInt(Price)*parseInt(Number);
              
-         
+                totalbooks+=parseInt(Number);
+                allgoodstotalprice+=parseInt(Price)*parseInt(Number);
+
                 item.appendChild(itemID);
                 item.appendChild(itemName);
                 item.appendChild(itemRequire);
@@ -57,7 +64,11 @@ function OrderDetailBuild(ID){
                 item.appendChild(itemTotalPrice);
                 List.appendChild(item);
             });
+
+            document.getElementById("totalbooks").innerHTML+=totalbooks;
+            document.getElementById("allgoodstotalprice").innerHTML+=allgoodstotalprice;
         },
         error:(error)=>{console.log(error,"In File OrderDetailPageProcessor.js OrderDetailBuild(ID) API fail");}
     });
 }
+

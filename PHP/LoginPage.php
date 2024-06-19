@@ -25,7 +25,7 @@
         <div id="input-wronging-Block">
             <div id="input-Block">
                 <input type="text" name="account" id="account" placeholder="帳號">
-                <input type="text" name="password" id="password" placeholder="密碼">
+                <input type="password" name="password" id="password" placeholder="密碼">
                 <div id="verify-Code-Img-Block">
                     <input type="text" name="verifyCode" id="verifyCode" placeholder="驗證碼" maxlength="6">
                     <canvas id="verify-code-img"></canvas>

@@ -1,6 +1,9 @@
 <?php
+ 
     require_once("DB//DB_Common.php");
     require_once("DB/DB_newGoods.php");
+
+    if($_POST){GoodsUpload($DB,$loginuser,$loginsys);}
 ?>
 <!DOCTYPE html>
 <html lang="zh_TW">
@@ -15,7 +18,7 @@
     <script type="text/javascript" src="../JavaScript/HeaderBuilder.js"></script>
     <script type="text/javascript" src="../JavaScript/newGoodsProcessor.js"></script>
     <script type="text/javascript" src="../JavaScript/TabViewButtonProcessor.js"></script>
-    <script type="text/javascript" src="../JavaScript/MsgProcessor.js"></script>
+    
 
     <title>School Book Store</title>
 </head>
@@ -41,8 +44,3 @@
     </div>
 </body>
 </html>
-<?php
-    if($_POST){
-        GoodsUpload($DB,$loginuser,$loginsys);
-    }
-?>

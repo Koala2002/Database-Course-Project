@@ -70,7 +70,7 @@ function OrderCheckButtonSetting(){
                         state:"complete"
                     },
                     success:(result)=>{
-                        if(result["result"]="fullcomplete")MsgSend(3,id);
+                        if(result["result"]=="fullcomplete")MsgSend(3,id);
                         window.location.reload();
                     },
                     error:(error)=>{

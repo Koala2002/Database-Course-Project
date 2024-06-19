@@ -55,7 +55,7 @@
 
                 return;
             }
-            else if($result["ord_seller"]==$loginsys){//如果是賣家第一次按下
+            else if($result["ord_seller"]==$loginuser){//如果是賣家第一次按下
                 mysqli_query($DB,"
                     UPDATE OrderForm_UPDATE_ARScBc_ViewForLoginUser
                     SET ord_state='2'
@@ -75,8 +75,27 @@
         else if($_POST["state"]=="terminate"){
             $timenow=date("Y-m-d H:i:s");
 
+            $detailresult=mysqli_query($DB,"
+                SELECT * FROM OrderDetailViewForLoginUser WHERE ord_id='$_POST[OrderID]'
+            ");
+
+            $detailData=array();
+            while($row=mysqli_fetch_array($detailresult))array_push($detailData,$row);
+            
+            foreach($detailData as $index => $detail){
+                $GoodsID=$detail["goods_id"];
+                $GoodsNumber=$detail["ord_quantity"];
+
+                mysqli_query($DB,"
+                    UPDATE Goods_NAME_UPDATE_ViewForLoginUser SET number=number+$GoodsNumber WHERE goods_id=$GoodsID
+                ");
+                mysqli_query($DB,"
+                    UPDATE Goods_UPDATE_ViewForLoginUser SET number=number+$GoodsNumber WHERE goods_id=$GoodsID
+                ");
+            }
+
             mysqli_query($DB,"
-                UPDATE OrderForm_UPDATE_ARScBc_ViewForLoginUser SET ord_state='5',ord_endtime='$timenow' WHERE ord_id='$_POST[OrderID]'
+                UPDATE OrderForm_UPDATE_ARScBc_ViewForLoginUser SET ord_state='6',ord_endtime='$timenow' WHERE ord_id='$_POST[OrderID]'
             ");
         }
 

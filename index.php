@@ -28,12 +28,52 @@
             if($loginstate)echo "<script>UserLoginHeaderBuild('','PHP/');</script>";
             else echo "<script>UserUnLoginHeaderBuild('','PHP/');</script>";
         ?>
-
     </div>
+
+    
 
     <div id="searchBlock">
         <form method="get" id="search">
-            <input type="text" name="Search" id="querytext" placeholder="請輸入書籍、科系、教授、課程名稱查詢..." maxlength="40">
+            <div id="SortSettingBlock">
+                <div id="sort-type-block">
+                    <?php
+                        $SortTypeText="";
+                        if(isset($_GET["SortType"]))$SortTypeText=$_GET["SortType"]=='up'?"價格 ⬆":"價格 ⬇";
+                        else $SortTypeText="價格 ⬇";
+                        
+                        $type=!isset($_GET["SortType"])?'down':$_GET["SortType"];
+
+                        echo "
+                            <div id='SortType-input' onclick='SortChange()'>{$SortTypeText}</div>
+                            <input type='hidden' name='SortType' id='SortType' value='{$type}'>
+                        ";
+                    ?>
+                </div>
+                <div id="price-ord-block">
+                    <?php
+                        $minPrice="";
+                        $maxPrice="";
+
+                        if(isset($_GET["minPrice"]))$minPrice=$_GET["minPrice"];
+                        if(isset($_GET["maxPrice"]))$maxPrice=$_GET["maxPrice"];
+                        
+                        echo "
+                            <input type='number' name='minPrice' id='minPrice' value='{$minPrice}' placeholder='最低價' min='0' max='10000'>
+                            <pre> ~ </pre>
+                            <input type='number' name='maxPrice' id='maxPrice' value='{$maxPrice}' placeholder='最高價' min='0' max='10000'>
+                        ";
+                    ?>
+                </div>
+            </div>
+            
+            <?php
+                $searchvalue="";
+                if(isset($_GET["Search"]))$searchvalue=$_GET["Search"];
+
+                echo "
+                    <input type='text' name='Search' id='querytext' value='{$searchvalue}' placeholder='請輸入書籍、科系、教授、課程名稱查詢...' maxlength='40'>
+                ";
+            ?>
             <input type="submit" name="querybutton" value="search" id="querybutton">
         </form>
     </div>

@@ -13,9 +13,9 @@
     #header #LogoutLink,
     #header button{margin-left: 25px;}
     
-    #HomeLink{
+    #DeveloperInformationBtn{
         position:absolute;
-        left:calc(50vw - 75px);
+        left:calc(50vw - 3vh - 25px);
     }
     
  
@@ -113,7 +113,7 @@
     z-index: 20;
 }
 
-#newGoodsLink,#MailBoxBtn{
+#newGoodsLink,#MailBoxBtn,#DeveloperInformationBtn{
     width: 6vh;
     height: 6vh;
 
@@ -189,7 +189,7 @@
 
 .Mail-Row-Container{
     width:calc(25vw - 100px);
-    background-color: var(--websitesecondColor); 
+   
 
     padding: 10px;
     margin-top: 10px;
@@ -214,3 +214,89 @@
         cursor:pointer;
     }
 }
+
+/*Developer Block*/
+#DeveloperInfBlock{
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    height: 92vh;
+    width: 100vw;
+
+    left: 0;
+    top:-92vh;
+
+    background-color: var(--websitebackground-color);
+
+    transition: top 0.25s;
+
+    z-index: 5;
+}
+
+
+#developer-inf{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: center;
+
+   
+    width: 25vw;
+
+    border-radius: 25px;
+
+    line-height: 1em;
+}
+
+#developer-inf #title,#developer-inf #item{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#developer-inf #title{
+    background-color: var(--websitethirdColor);
+    color: var(--websitesecondColor);
+
+    height: 7.5vh;
+    width: 25vw;
+
+    border-radius: 25px 25px 0 0;
+
+    font-size: 1.5em;
+}
+
+#developer-inf #item{
+    background-color: var(--websitesecondColor);
+
+    height: 5vh;
+    width: 25vw;
+
+    font-size: 1.25em;
+}
+
+#developer-inf #item:last-child{
+    border-radius: 0 0 25px 25px;
+}
+
+#bottom-inf{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+    bottom: 0;
+
+    background-color: var(--websitesecondColor);
+    
+    border-radius: 25px 25px 0 0;
+ 
+    width: 60vw;
+    height: 8vh;
+
+    font-size: 1.25em;
+}
+/*Developer Block*/

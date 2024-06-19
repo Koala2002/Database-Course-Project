@@ -7,7 +7,7 @@
     if($_POST["MailType"]>=1&&$_POST["MailType"]<=7){
         $result="
             SELECT * 
-            FROM OrderMessageViewForLoginuser
+            FROM OrderMessageViewForLoginUser
             WHERE msg_id='{$_POST["MailID"]}'    
         ";
      
@@ -23,5 +23,8 @@
         $result=mysqli_fetch_array(mysqli_query($DB,$result))["goods_id"];
     }
 
-    echo json_encode(["detail"=>$result]);
+    echo json_encode([
+        "detail"=>$result,
+        "error"=>$DB->error
+    ]);
 ?>

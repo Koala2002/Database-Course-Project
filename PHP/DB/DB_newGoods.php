@@ -20,9 +20,9 @@
                 '{$num}'
             )");
             
-	}
+        }
 
-	header("location:newGoodsPage.php?GoodsNum=0&State=0");
+        header("location:newGoodsPage.php?GoodsNum=0&State=0");
     }
 
     function GoodsInfInputBlockContentBuild(){
