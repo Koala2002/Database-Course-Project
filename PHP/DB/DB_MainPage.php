@@ -8,7 +8,6 @@
     $sql_data=SearchStatement_ToSQL(isset($_GET["Search"])?$_GET["Search"]:null,$loginstate);
         
     for($id=0;$id<count($sql_data);$id++){
-        
         $SQL.= $sql_data[$id];
         if($id==count($sql_data)-1)$SQL.=")";
         else $SQL.= " UNION ";
@@ -34,6 +33,8 @@
     $result=mysqli_query($DB,$SQL);
 
     echo $SQL;
+    
+    echo $DB->error;
     while($result&&$row=mysqli_fetch_array($result))array_push($goodslistData,$row);
     /*fetch all goods from database*/
 
@@ -44,6 +45,7 @@
         $GoodsView=$loginstate?"Goods_SELECT_ViewForLoginUser":"GoodsViewForUnloginUser";
         $DepartmentView=$loginstate?"DepartmentViewForLoginUser":"DepartmentViewForUnloginUser";
         $InstructorView=$loginstate?"InstructorViewForLoginUser":"InstructorViewForUnloginUser";
+        $BookView=$loginstate?"BookViewForLoginUser":"BookViewForUnloginUser";
 
         if(!$SearchStatement){
             $SQL="(SELECT * FROM {$GoodsView} WHERE number>0)";
@@ -59,14 +61,13 @@
         
         foreach($SearchStatement as $str) {
             $SQL_Query="(";
-            if(preg_match($all_chinese,$str)){//科系、教授名稱
+            if(preg_match($all_chinese,$str)){//科系、教授、課程名稱
                 $statement1="
                     (SELECT * FROM {$GoodsView}
                     WHERE number>0 AND {$GoodsView}.isbn IN (
                         SELECT {$CourseView}.isbn FROM {$CourseView}
-                        WHERE {$CourseView}.isbn IS NOT NULL AND {$CourseView}.dep_id=(
-                            SELECT {$DepartmentView}.dep_id FROM {$DepartmentView} WHERE {$DepartmentView}.dep_name='$str'
-                        )
+                        JOIN {$DepartmentView} ON {$CourseView}.isbn IS NOT NULL AND {$DepartmentView}.dep_id={$CourseView}.dep_id
+                        WHERE {$DepartmentView}.dep_name LIKE '%$str%'
                     ))
                 ";
 
@@ -74,22 +75,28 @@
                     (SELECT * FROM {$GoodsView}
                     WHERE number>0 AND {$GoodsView}.isbn IN (
                         SELECT {$CourseView}.isbn FROM {$CourseView}
-                        WHERE {$CourseView}.isbn IS NOT NULL AND {$CourseView}.ins_id=(
-                            SELECT {$InstructorView}.ins_id FROM {$InstructorView} WHERE {$InstructorView}.ins_name='$str'
-                        )
+                        JOIN {$InstructorView} ON {$CourseView}.isbn IS NOT NULL AND {$InstructorView}.ins_id={$CourseView}.ins_id
+                        WHERE {$InstructorView}.ins_name LIKE '%$str%'
                     ))
                 ";
 
-                $SQL_Query.=$statement1." UNION ".$statement2;
+                $statement3="
+                    (SELECT * FROM {$GoodsView}
+                    WHERE number>0 AND {$GoodsView}.isbn IN (
+                        SELECT {$CourseView}.isbn FROM {$CourseView}
+                        WHERE {$CourseView}.cou_title LIKE '%$str%'
+                    ))
+                ";
+
+                $SQL_Query.=$statement1." UNION ".$statement2." UNION ".$statement3;
             }
             else if(preg_match($all_alpha,$str)){//教授名稱
                 $statement="
                     (SELECT * FROM {$GoodsView}
                     WHERE number>0 AND {$GoodsView}.isbn IN (
                         SELECT {$CourseView}.isbn FROM {$CourseView}
-                        WHERE {$CourseView}.isbn IS NOT NULL AND {$CourseView}.ins_id=(
-                            SELECT {$InstructorView}.ins_id FROM {$InstructorView} WHERE {$InstructorView}.ins_name='$str'
-                        )
+                        JOIN {$InstructorView} ON {$CourseView}.isbn IS NOT NULL AND {$InstructorView}.ins_id={$CourseView}.ins_id
+                        WHERE {$InstructorView}.ins_name LIKE '%$str%'  
                     ))
                 ";
 

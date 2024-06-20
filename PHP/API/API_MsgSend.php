@@ -30,7 +30,7 @@
 
         $user_id=null;
         if($orddata["ord_buyer"]==$loginuser)$user_id=$orddata["ord_seller"];
-        else $user_id=$$orddata["ord_buyer"];
+        else $user_id=$orddata["ord_buyer"];
     }
 
     if(//各種訂單事件，只是顯示格式不同，傳送的訊息類型一樣

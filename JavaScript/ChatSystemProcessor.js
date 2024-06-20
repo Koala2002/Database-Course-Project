@@ -70,7 +70,7 @@ window.onload = ()=>{
             }
             ChatMsgInput.value='';
             ChatMsgInput.value=ChatMsgInput.value.trim();
-
+            console.log("TEST");
             $.ajax({
                 url:"../PHP/API/API_MsgSend.php",
                 type:"POST",
